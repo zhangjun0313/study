@@ -1,0 +1,106 @@
+.bg{
+	width: 1000px;
+	height: 800px;
+	background: url(../images/001.png);
+	display: inline-block;
+}
+.div1{
+	width: 356px;
+	height: 657px;
+	background:url(../images/bg.png);
+	margin: 66px auto;
+	padding-top: 22px;
+}
+.heng{
+	width: 58px;
+	height: 4px;
+	background: #a3a1a7;
+	margin-left: 154px;
+	border-radius: 5px;
+}
+.div2{
+	width: 322px;
+	height: 542px;
+	background:url(../images/bg2.png);
+	margin:19px 0 0 17px;
+	padding-top: 22px;
+	position: relative;
+}
+.yuan{
+	width: 50px;
+	height: 40px;
+	background:url(../images/logo.png);
+	margin: 17px 0 0 156px;
+}
+.shuru{
+	width: 318px;
+	height: 60px;
+	background: #0a1b3e;
+	position: absolute;
+	left: 2px;
+	bottom: 2px;
+}
+.tu{
+	margin: 10px 15px 0 15px;
+	width: 35px;
+}
+.text{
+	width: 190px;
+	height: 40px;
+	background: #999;
+	border-radius: 5px;
+	margin: 11px 15px 0 0;
+}
+.btn1{
+	color: #e15671;
+	margin: 22px 0 0 0;
+}
+.ul1{
+	width: 279px;
+	height: 478px;
+	margin: 0 0 0 22px;
+	color: #fff;
+	overflow: auto;
+}
+.s1{
+	max-width:194px;
+	background: #c55170;
+	line-height: 24px;
+	padding: 8px 10px 5px 8px;
+	border-radius: 5px;
+	word-break: break-all;
+}
+.tu1{
+	margin-left: 16px;
+}
+.s2{
+	width: 5px;
+	height: 9px;
+	background: url(../images/ired.png);
+	position: absolute;
+	top: 16px;
+	right: 45px;
+}
+.li1{
+	position: relative;
+	margin-bottom: 20px;
+}
+.tu2{
+	margin-right: 14px;
+}
+.s3{
+	width: 5px;
+	height: 9px;
+	background: url(../images/iblack.png);
+	position: absolute;
+	top: 16px;
+	left: 45px;
+}
+.s4{
+	max-width: 211px;
+	background: #1a1017;
+	line-height: 24px;
+	padding: 8px 10px 5px 8px;
+	border-radius: 5px;
+	word-break: break-all;
+}
