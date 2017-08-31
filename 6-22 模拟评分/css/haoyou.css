@@ -1,0 +1,27 @@
+ .bg{
+ 	width: 1000px;
+ 	height: 734px;
+ 	background: url(../images/010.png);
+ 	margin: 100px auto;
+ 	padding-top: 66px;
+ }
+.box{
+	width: 384px;
+	height: 641px;
+	background: url(../images/011.png);
+	margin: 0 auto;
+	padding: 66px 0 0 0;
+}
+.div1{
+	width: 240px;
+	height: 46px;
+	background:rgba(0,0,0,0.7) url(../images/013.png) no-repeat 15px 18px;
+	margin: 0 auto;
+	color: #fff;
+	line-height: 46px;
+	font-size: 16px;
+	border-radius: 5px;
+	padding-left: 40px;
+	margin-bottom: 10px;
+}
+

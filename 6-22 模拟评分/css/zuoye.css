@@ -1,0 +1,58 @@
+.bg{
+	width: 764px;
+	height: 500px;
+	background: url(../images/bg.jpg);
+	margin: 0 auto;
+	padding-top: 300px;
+}
+.box{
+	width: 460px;
+	height: 200px;
+	margin-left: 152px;
+}
+.top{
+	width: 460px;
+	height: 142px;
+	background: #fff;
+}
+.bot{
+	width: 325px;
+	height: 36px;
+	background: #e15671 url(../images/yuan.png) no-repeat 130px 20px;
+	color: #fff;
+	font-size: 14px;
+	padding: 22px 0 0 135px;
+}
+.topT{
+	width: 215px;
+	height: 24px;
+	background: url(../images/logo.jpg) no-repeat 109px bottom;
+	padding: 30px 0 0 245px;
+	color: #000;
+}
+.s1{
+	font-size: 20px;
+}
+.s2{
+	font-size: 18px;
+}
+.s3{
+	width: 30px;
+	height: 30px;
+	background: url(../images/xing2.png) no-repeat;
+	margin: 31px 0 0 0;
+	padding-right: 12px;
+}
+.topB{
+	padding-left: 89px;
+}
+#btn{
+	width: 61px;
+	height: 30px;
+	background: #fff;
+	margin-top: 33px;
+	border-radius: 5px;
+	margin-left: 10px;
+	color: #fff;
+	border: 0;
+}
