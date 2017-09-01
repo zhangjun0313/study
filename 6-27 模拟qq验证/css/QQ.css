@@ -1,0 +1,48 @@
+.bg{
+	width: 764px;
+	height: 550px;
+	background: url(../images/008.png);
+	padding-top: 250px;
+}
+.box{
+	width: 470px;
+	height: 120px;
+	background: url(../images/bg.png);
+	padding-top: 80px;
+}
+.top{
+	height: 40px;
+	font-size: 16px;
+	color: #fff;
+	line-height: 40px;
+}
+.top span{
+	margin: 0 0 0 34px;
+}
+#txt{
+	width: 160px;
+	height: 40px;
+	background: #fff;
+	border-radius: 5px;
+	margin: 0 15px;
+	padding-left: 20px;
+}
+#btn{
+	width: 70px;
+	height: 40px;
+	background: #000;
+	text-align: center;
+	color: #fff;
+	font-size: 16px;
+	border-radius: 5px;
+}
+.bot{
+	height: 40px;
+	line-height: 40px;
+	color: #d8c17c;
+	width: 180px;
+	text-align: center;
+	background: rgba(0,0,0,0.2);
+	margin: 13px 0 0 137px;
+	border-radius:5px ;
+}

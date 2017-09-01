@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+				font-style: normal;
+				list-style: none;
+				background-color: inherit;
+			}
+			.box{
+				width: 764px;
+				height: 544px;
+				padding-top: 256px;
+				margin: 0 auto;
+				background: url(images/bg.png) no-repeat;
+			}
+			.box .cont{
+				height: 260px;
+				margin-left: 190px;
+				
+			}
+			.box .cont li{
+				width: 388px;
+				height: 36px;
+				margin-bottom: 18px;
+			}
+			.box .p1{
+				width: 388px;
+				height: 100px;
+				line-height: 50px;
+				font-size: 16px;
+				color: #acacac;
+				margin-top: 68px;
+				margin-left: 190px;
+			}
+			.cont li span,.cont li em,.cont li i{
+				float: left;
+				width: 44px;
+				height: 36px;
+			}
+			.cont li span{
+				background: url(images/1.png) no-repeat;
+			}
+			.cont li em{
+				font-style: normal;
+				margin: 0 10px;
+				border-radius: 3px;
+				background: #FFFFFF;
+				font-size: 18px;
+				color: #000000;
+				line-height: 36px;
+				text-align: center;
+			}
+			.cont li i{
+				margin-right: 20px;
+				background: url(images/2.png) no-repeat;
+			}
+			.cont li div{
+				float: left;
+				width: 210px;
+				height: 36px;
+				padding-left: 4px;
+				background: #171818;
+				border-radius: 4px;
+				font-size: 16px;
+				color: #FFFFFF;
+				line-height: 36px;
+			}
+			div strong{
+				margin-left: 12px;
+				color: yellow;
+			}
+			div mark{
+				color: yellow;
+			}
+			.p1 span,.p1 em,.p1 i{
+				display: inline-block;
+				height: 38px;
+				border-radius: 4px;
+				font-size: 16px;
+				background: #FFFFFF;
+				color: #000000;
+				line-height: 38px;
+				text-align: center;
+			}
+			.p1 span{
+				width: 64px;
+			}
+			.p1 em{
+				width: 64px;
+			}
+			.p1 i{
+				width: 64px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<ul class="cont">
+				<li class="l1"><span class="jian"></span><em class="suliang">0</em><i class="jia"></i><div>单价:<strong class="danjia">12.5</strong>元 小计<mark class="jiage">0</mark>元</div></li>
+				<li class="l2"><span class="jian"></span><em class="suliang">0</em><i class="jia"></i><div>单价:<strong class="danjia">10.5</strong>元 小计<mark class="jiage">0</mark>元</div></li>
+				<li class="l3"><span class="jian"></span><em class="suliang">0</em><i class="jia"></i><div>单价:<strong class="danjia">8.5</strong>元 小计<mark class="jiage">0</mark>元</div></li>
+				<li class="l4"><span class="jian"></span><em class="suliang">0</em><i class="jia"></i><div>单价:<strong class="danjia">8</strong>元 小计<mark class="jiage">0</mark>元</div></li>
+				<li class="l5"><span class="jian"></span><em class="suliang">0</em><i class="jia"></i><div>单价:<strong class="danjia">14.5</strong>元 小计<mark class="jiage">0</mark>元</div></li>
+			</ul>
+			<p class="p1">商品合计共：<span class="gongji">0</span> 件&ensp;&ensp;共花费了：<em class="gongjiage">0</em> 元<br/>其中最贵的商品单价是：<i class="zuigao">0</i> 元</p>
+		</div>
+		
+		
+		
+		<script src="js/jisuanqi.js"></script>
+	</body>
+</html>

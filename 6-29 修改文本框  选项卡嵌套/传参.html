@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.d1{
+				width: 200px;
+				height: 200px;
+				border: 1px solid red;
+				display: none;
+			}
+			.d2{
+				width: 200px;
+				height: 200px;
+				border: 1px solid red;
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box1">
+			<input type="button" value="按钮1" class="btn1" style="background: yellow;" />
+			<input type="button" value="按钮2" class="btn1" />
+			<input type="button" value="按钮3" class="btn1" />
+			<input type="button" value="按钮4" class="btn1" />
+			<div class="d1" style="display: block;">1</div>
+			<div class="d1">2</div>
+			<div class="d1">3</div>
+			<div class="d1">4</div>
+		</div>
+		<div id="box2">
+			<input type="button" value="按钮1" class="btn2"  style="background: yellow;"/>
+			<input type="button" value="按钮2" class="btn2" />
+			<input type="button" value="按钮3" class="btn2" />
+			<input type="button" value="按钮4" class="btn2" />
+			<div class="d2" style="display: block;">1</div>
+			<div class="d2">2</div>
+			<div class="d2">3</div>
+			<div class="d2">4</div>
+		</div>
+		
+		<script>
+			var box1 = document.getElementById('box1')
+			var box2 = document.getElementById('box2')
+			fun(box1)
+			fun(box2)
+			function fun( a ){
+				var btn = a.querySelectorAll('input')
+				var d = a.querySelectorAll('div')
+				for( var i = 0 ; i < btn.length ; i++ ){
+					btn[i].index = i
+					btn[i].onclick = function(){
+						for( var j = 0 ; j < btn.length ; j++ ){
+							btn[j].style.background = ''
+							d[j].style.display = 'none'
+						}
+						this.style.background = 'yellow'
+						d[this.index].style.display = 'block'
+					}
+				}
+			}
+			
+			
+			
+			
+			
+			
+			
+//			for( var i = 0 ; i < btn1.length ; i++ ){
+//				btn1[i].index = i
+//				btn1[i].onclick = function(){
+//					for( var j = 0 ; j < btn1.length ; j++ ){
+//						btn1[j].style.background = ''
+//						d1[j].style.display = 'none'
+//					}
+//					this.style.background = 'yellow'
+//					d1[this.index].style.display = 'block'
+//				}
+//			}
+		</script>
+	</body>
+</html>
