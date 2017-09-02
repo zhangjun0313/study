@@ -1,0 +1,97 @@
+.bg{
+	width: 1000px;
+	height: 695px;
+	background: #ffd800 url(../images/002.png) no-repeat 36px 239px;
+	margin: 100px auto;
+	padding-top: 105px;
+}
+.box{
+	width: 720px;
+	height: 510px;
+	background: #fff;
+	margin-left: 140px;
+	border-radius: 5px;
+}
+.top{
+	width: 720px;
+	height: 439px;
+	background: #6cd2eb url(../images/003.png);
+	position: relative;
+}
+.logo{
+	width: 51px;
+	height: 205px;
+	background: url(../images/004.png);
+	margin: 123px 0 0 55px;
+}
+.imgBox{
+	width: 530px;
+	height: 350px;
+	border: 3px solid #000;
+	margin: 65px 0 0 51px;
+	position: relative;
+}
+.dw{
+	width: 106px;
+	height: 12px;
+	background: url(../images/005.png);
+	position: absolute;
+	top: 23px;
+	left: 307px;
+}
+.bot{
+	width: 372px;
+	height: 42px;
+	background: #fff;
+	border-radius: 5px;
+	padding: 29px 0 0 348px;
+}
+.qiehuan{
+	width: 17px;
+	height: 17px;
+	border-radius: 17px;
+	background: #c9c9c9;
+	margin-right: 17px;
+}
+.img{
+	opacity: 0;
+	transition: .3s;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.left{
+	width: 24px;
+	height: 45px;
+	background: url(../images/prev.png);
+	position: absolute;
+	top: 156px;
+	left: 13px;
+}
+.right{
+	width: 24px;
+	height: 45px;
+	background: url(../images/next.png);
+	position: absolute;
+	top: 156px;
+	right: 13px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

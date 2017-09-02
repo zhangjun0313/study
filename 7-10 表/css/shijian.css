@@ -1,0 +1,84 @@
+.bg{
+	width: 1024px;
+	height: 701px;
+	background: url(../images/bg22.png);
+	position: relative;
+}
+.yc{
+	width: 500px;
+	height: 80px;
+	overflow: hidden;
+	position: absolute;
+	left: 295px;
+	top: 274px;
+}
+.list1{
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+.l1{
+	position: absolute;
+	left: 0;
+}
+.l2{
+	position: absolute;
+	left: 65px;
+}
+.l3{
+	position: absolute;
+	left: 125px;
+}
+.l4{
+	position: absolute;
+	left: 184px;
+}
+.l5{
+	position: absolute;
+	left: 248px;
+}
+.l6{
+	position: absolute;
+	left: 308px;
+}
+.l7{
+	position: absolute;
+	left: 367px;
+}
+.l8{
+	position: absolute;
+	left: 432px;
+}
+.list2{
+	position: absolute;
+	left: 0;
+	top: 80px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,50 @@
+.bg{
+	width: 658px;
+	height: 517px;
+	background: url(../images/bg1.png);
+	position: relative;
+}
+.bg2{
+	width: 587px;
+	height: 158px;
+	position: absolute;
+	left: 46px;
+	top: 0;
+	z-index: 2;
+	background: url(../images/bg2.png) no-repeat;
+}
+.list li img{
+	width: 380px;
+	height: 290px;
+}
+.list{
+	width: 600%;
+	height: 290px;
+	position: absolute;
+	left: 0;
+	top: 6px;
+}
+.list li{
+	-position: relative;
+}
+.yinc{
+	position: absolute;
+	left: 142px;
+	top: 0;
+	overflow: hidden;
+	width: 380px;
+	height: 290px;
+}
+.list li span{
+	width: 380px;
+	height: 50px;
+	background: rgba(0,0,0,0.3);
+	position: absolute;
+	bottom: -50px;
+	color: #fff;
+	font-size: 16px;
+	line-height: 24px;
+}
+.list li span mark{
+	font-size: 18px;
+}

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>win10日历</title>
+  <style>
+    body {
+      margin: 0;
+    }
+    a {
+      text-decoration: none;
+      color: #fff;
+    }
+    .calendar {
+      width: 460px;
+      margin: 0 auto;
+      background: rgba(0, 0, 0, 0.5);
+      padding-bottom: 20px;
+    }
+    .date-month {
+      width: 100%;
+      height: 66px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-sizing: border-box;
+      padding: 0 32px;
+    }
+    .cur-month {
+      height: 100%;
+      color: #ccc;
+      font: 16px/66px Arial;
+    }
+    .set-month a, .cur-month {
+      cursor: default;
+      -webkit-user-select: none;
+    }
+    .set-month a:hover, .cur-month:hover {
+      color: #fff;
+    }
+    .set-month {
+      width: 88px;
+      height: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .set-month a {
+      color: #ccc;
+      font-size: 24px;
+    }
+    .prev {
+      transform: rotate(90deg);
+    }
+    .next {
+      transform: rotate(-90deg);
+    }
+    .date-days, .date-nums{
+      width: 100%;
+      height: 55px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .date-nums {
+      height: auto;
+      flex-wrap: wrap;
+    }
+    .date-days span, .date-nums span{
+      width: 60px;
+      height: 55px;
+      border: 2px solid rgba(0,0,0,0);
+      text-align: center;
+      color: #fff;
+      line-height: 55px;
+      cursor: default;
+    }
+    .date-days span:hover, .date-nums span:hover {
+      border-color: #ccc;
+    }
+    .current-day {
+      background: rgb(141, 214, 237);
+    }
+    .date-nums span.other-month-date {
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <div class="calendar">
+    <div class="date-month">
+      <div class="cur-month">xxxx年x月</div>
+      <div class="set-month">
+        <a href="javascript:;" class="prev"><</a>
+        <a href="javascript:;" class="next"><</a>
+      </div>
+    </div>
+    <div class="date-dates">
+      <div class="date-days">
+        <span>一</span>
+        <span>二</span>
+        <span>三</span>
+        <span>四</span>
+        <span>五</span>
+        <span>六</span>
+        <span>日</span>
+      </div>
+      <div class="date-nums">
+      <!--<span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+        <span>4</span>
+        <span>5</span>
+        <span>6</span>
+        <span>7</span>-->
+      </div>
+    </div>
+  </div>
+  <script src="utils.js"></script>
+<script>
+	var dateNnums = document.getElementsByClassName('date-nums')[0];
+	var curMonth = document.getElementsByClassName('cur-month')[0];
+	var prev = document.getElementsByClassName('prev')[0];
+	var next = document.getElementsByClassName('next')[0];
+	var n = 0 ;
+	fn( n )
+	next.onclick = function(){
+		n++
+		fn( n )
+	}
+	prev.onclick = function(){
+		n--
+		fn( n )
+	}
+	function fn(){
+		var d = new Date();
+		var yue = d.getMonth(); //获取本机月份
+		var jintian = d.getDate()
+		var ds = new Date();
+		yue = yue + n ;
+		ds.setMonth( yue );
+		//console.log(ds.setMonth(yue))   //下标 6 月份 7
+		var dsNian = ds.getFullYear();
+		var dsYue = ds.getMonth();
+		//console.log(dsYue)
+		curMonth.innerHTML = dsNian + '年' + ( dsYue + 1 ) + '月' ;
+		ds.setDate( 1 );
+		var xingqiji = ds.getDay();
+		if( xingqiji == 0 ){
+			xingqiji = 7
+		}
+		//console.log(xingqiji);//星期六
+		ds.setMonth( yue + 1 ); //想知道这个月有多少天，就得设置为下个月
+		
+		ds.setDate( 0 ); //   然后把天设置为0 ， 显示的就是上个月的最后一天
+		//console.log(ds.getDay())//最后一天星期几
+		var zuihou = ds.getDay()
+		//console.log(zuihou)
+		var tianshu = ds.getDate();
+		//console.log(tianshu)//七31天
+		var kongge = xingqiji - 1 ;//  把生成的块推到相应的星期上
+		
+		
+		d.setMonth(yue)
+		d.setDate(0)
+		//console.log(d.getMonth())
+		//console.log(d.getDate())
+		var m =d.getDate()
+		d.setMonth(yue+1)
+		d.setDate(0)
+		//console.log(d.getMonth())
+		//console.log(d.getDate())
+		var w = d.getDate()
+		
+		var html = '';
+		for( var i = 0 ; i < kongge ; i++ ){
+			html = '<span style="color:#ccc;">'+(m-i)+'</span>'+html
+		}
+		for( var i = 1 ; i <= tianshu ; i++ ){
+			if( jintian == i ){
+				html += '<span style="background:blue;">'+i+'</span>'
+			}else{
+				html += '<span>'+i+'</span>'
+			}
+			
+		}
+		var len = 42 - kongge - tianshu
+		for( var i = 0 ; i < len ; i++ ){
+			html += '<span style="color:#ccc;">'+(i+1)+'</span>'
+		}
+		console.log(7-zuihou)
+		dateNnums.innerHTML = html
+	}
+	
+	
+</script>
+</body>
+</html>
