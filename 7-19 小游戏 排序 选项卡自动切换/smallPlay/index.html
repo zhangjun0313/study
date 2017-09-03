@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.box{
+				width: 1000px;
+				height: 475px;
+				padding-top: 225px;
+				margin: 0 auto;
+				background: url(images/bg.png);
+				position: relative;
+			}
+			
+			.cont{
+				width: 690px;
+				height: 414px;
+				margin-left: 155px;
+				box-sizing: border-box;
+				border: 6px solid #e6d4f4;
+				position: absolute;
+				background: rgba(0,0,0,0.7) url(images/logo.png) no-repeat 142px 29px;
+				overflow: hidden;
+			}
+			.one{
+				position: absolute;
+				left: 175px;
+				top: 245px;
+				width: 80px;
+				height: 80px;
+				border-radius: 50%;
+				box-sizing: border-box;
+				padding-top: 16px;
+				line-height: 24px;
+				font-size: 16px;
+				color: #FFFFFF;
+				text-align: center;
+				border: 1px solid #9a8da0;
+				background: #78258c;
+				z-index: 999;
+			}
+			.two{
+				background: #59599f;
+				top: 345px;
+			}
+			.star{
+				width: 155px;
+				height: 46px;
+				position: absolute;
+				left: 268px;
+				bottom: 32px;
+				text-decoration: none;
+				background: url(images/btn.png);
+			}
+			.img{
+				position: absolute;
+				top: -70px;
+			}
+			.img img{
+				width: 74px;
+				height: 63px;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<div class="one"><span class="fenshu">0</span>分<br/>得分</div>
+				<div class="one two"><span class="fenshu">0</span>分<br/>失分</div>
+			<div class="cont">
+				
+				<a href="javaScript:;" class="star"></a>
+				<div class="img">
+					<img src="images/1.png"/>
+				</div>
+			</div>
+		</div>
+		
+		<script src="../utils.js"></script>
+		<script src="js/play.js"></script>
+	</body>
+</html>

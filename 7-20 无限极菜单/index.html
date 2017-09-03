@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <style>
+    html {
+        width: 100%;
+        height: 100%;
+    }
+    
+    body {
+        margin: 0px;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .main {
+        width: 100%;
+        height: 100%;
+        background: url(./image/bg.png) no-repeat;
+        background-size: 100% 100%;
+        overflow: hidden;
+    }
+    
+    .logo {
+        display: block;
+        width: 200px;
+        height: 55px;
+        background: url(./image/logo.png) no-repeat;
+        margin: 20px auto;
+    }
+    
+    ul {
+        list-style: none;
+        font-size: 22px;
+        color: #8c949c;
+        font-weight: bold;
+    }
+    
+    ul li {
+        position: relative;
+        padding-left: 10px;
+    }
+    
+    ul li div {
+        height: 98%;
+        width: 1px;
+        border-left: 1px dotted #ccc;
+        position: absolute;
+        left: 14px;
+        top: 18px;
+    }
+    
+    ul ul {
+        display: none;
+    }
+    
+    ul li span {
+        display: block;
+        line-height: 32px;
+        padding-left: 15px;
+        background: url(./image/icon.png) no-repeat left 500px;
+    }
+    
+    ul li span.add {
+        background-position: 0px -32px;
+    }
+    
+    ul li span.line {
+        background-position: 0px 11px;
+    }
+    
+    .tree {
+        margin-left: 300px;
+    }
+    </style>
+    <script>
+    var arr = [{
+        title: "第一级菜单",
+        child: [{
+            title: "第二集菜单"
+        }, {
+            title: "第二集菜单",
+            child: [{
+                title: "第三集菜单"
+            }, {
+                title: "第三集菜单",
+                child: [{
+                    title: "第四集菜单"
+                }, {
+                    title: "第四集菜单"
+                }, {
+                    title: "第四集菜单"
+                }]
+            }, {
+                title: "第三集菜单"
+            }]
+        }, {
+            title: "第二集菜单",
+            child: [{
+                title: "第三集菜单"
+            }, {
+                title: "第三集菜单"
+            }]
+        }]
+    }, {
+        title: "第一级菜单",
+        child: [{
+            title: "第二集菜单"
+        }, {
+            title: "第二集菜单",
+            child: [{
+                title: "第三集菜单"
+            }, {
+                title: "第三集菜单",
+                child: [{
+                    title: "第四集菜单"
+                }, {
+                    title: "第四集菜单"
+                }, {
+                    title: "第四集菜单"
+                }]
+            }, {
+                title: "第三集菜单"
+            }]
+        }, {
+            title: "第二集菜单",
+            child: [{
+                title: "第三集菜单"
+            }, {
+                title: "第三集菜单"
+            }]
+        }]
+    }, {
+        title: "第一集菜单"
+    }];
+
+    // 数据是怎么设计的？
+    // 先设计一个菜单的数据
+
+    /*
+        {
+            title:
+            child:
+        },
+        {
+            title:
+            child:
+        }
+
+        [{
+            title:"1"
+            child: [
+                {
+                    title:"2",
+                    child:[]
+                },
+                {
+                    title:"2"
+                }
+            ]
+        },
+        {
+            title:"1"
+            child:
+        }]
+    */
+
+
+    </script>
+</head>
+
+<body>
+    <div class="main">
+        <a href="http://www.miaov.com" class="logo"></a>
+        <div class="tree"  id="list">
+            <!--<ul>
+                  <li>
+                    <span class="line">第一集菜单</span>
+                    <ul style="display: block;">
+                        <li><span>第二集菜单</span></li>
+                        <li><span>第二集菜单</span></li>
+                        <li>
+                            <span class="line">第二集菜单</span>
+                            <ul style="display: block;">
+                                <li><span>第三集菜单</span></li>
+                                <li><span>第三集菜单</span></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li> 
+            </ul> -->
+        </div>
+    </div>
+    <script src="utils.js"></script>
+    <script>
+    	var list = document.getElementById('list')
+    	function func(arr){
+    		var html = '<ul>'
+    		arr.forEach(function( item ){
+    			html += `<li><span class="add">${item.title}</span>`
+    				if( item.child ){
+    					html += func( item.child )
+    				}
+    			html += `</li>`
+    		})
+    		html += '</ul>'
+    		return html
+    	}
+    	list.innerHTML = func(arr)
+    	
+    	
+    	var spans = document.getElementsByTagName('span')
+    	for( var i = 0 ; i < spans.length ; i++ ){
+    		spans[i].a = false
+    		var uls1 = spans[i].nextElementSibling
+    		if( uls1 ){
+    			spans[i].className = 'add'
+    		}else{
+    			spans[i].className = ''
+    		}
+    		spans[i].onclick = function(){
+    			uls2 = $('span',this.parentNode.parentNode)	
+    			console.log(uls2)
+    			if( this.a ){
+	    			var uls = this.nextElementSibling
+	    			//this.className = 'add'
+	    			if( uls ){
+	    				uls.style.display = 'none'
+	    				this.className = 'add'
+	    			}
+	    			this.a = false
+    			}else{
+    				for( var i = 0 ; i < uls2.length ; i++ ){
+		    			if( uls2[i].nextElementSibling ){
+		    				uls2[i].nextElementSibling.style.display = 'none'
+		    				uls2[i].className = 'add'
+		    				uls2[i].a = false
+		    			}
+		    		}
+	    			var uls = this.nextElementSibling
+	    			//this.className = 'line'
+	    			if( uls ){
+	    				uls.style.display = 'block'
+	    				this.className = 'line'
+	    			}
+	    			this.a = true
+    			}
+    		}
+    	}
+    	
+
+    	
+    	
+//  	fn()
+//  	function fn(){
+//  		var arr = []
+//	    	var lis = list.children[0].children //获取li
+//	    	//console.log(lis)
+//	    	for( var i = 0 ; i < lis.length ; i++ ){
+//	    		var spans = lis[i].children[0]
+//	    		//console.log(spans)
+//	    		arr.push(spans)
+//	    	}
+//	    	//console.log(arr)
+//	    	arr.forEach(function(spans){
+//	    		spans.a = true
+//	    		spans.onclick = function(){
+//	    			if( this.a == true ){
+//	    				var uls = spans.nextElementSibling
+//		    			//console.log(uls)
+//		    			if( uls ){
+//		    				uls.style.display = 'none'
+//		    			}
+//		    			this.className = 'add'
+//		    			this.a = false
+//	    			}else{
+//	    				var uls = spans.nextElementSibling
+//						//console.log(uls)
+//						if( uls ){
+//							uls.style.display = 'block'
+//						}
+//						this.className = 'line'
+//						this.a = true
+//	    			}
+//	    		}
+//	    	})
+//  	}
+
+
+
+    	
+
+    </script>
+</body>
+
+</html>

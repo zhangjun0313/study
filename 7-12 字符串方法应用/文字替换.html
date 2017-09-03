@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			input{
+				border: none;
+				outline: none;
+			}
+			.wrap{
+				height: 560px;
+				width: 800px;
+				background: #abdde7;
+				margin:50px auto;	
+				padding-top:140px;			
+			}
+			.box{
+				height: 270px;
+				width:514px;
+				margin:0 auto;
+				background: #fff;
+				border-radius: 20px;
+				padding: 30px 28px;
+				margin-bottom:12px ;
+			}
+			.box .txt{
+				float: left;
+				border: 1px solid #abdde7;
+				
+				height: 268px;
+				width: 398px;
+				background: #eef8fa;
+				color:#004654;
+				line-height:30px ;
+				font-size: 14px;
+				margin-right: 10px;
+			}
+			.box .right{
+				width: 100px;
+				float: left;
+			}
+			.box img{
+				vertical-align: top;
+				margin-bottom: 15px;
+			}
+			.tip{
+				width:520px;
+				height:108px;
+				margin:0 auto;
+				background: #fff;
+				border-radius: 20px;
+				padding: 25px;
+				display: none;
+			}
+			.btn{
+				height:40px ;
+				margin-bottom: 14px;
+			}
+			.search,.change{
+				float: left;
+				line-height: 40px;
+				width: 100px;
+				background: #a8a6f5;
+				color:#fff;
+				font-size: 16px;
+				margin-right: 20px;
+			}
+			.change{
+				background: #9fe7a9;
+			}
+			.content1,.content2{
+				height: 50px;
+				font-size: 16px;
+				
+			}
+			.content2{
+				display: none;
+			}
+			.searchInput ,.changeInput1,.changeInput2{
+				line-height: 50px;
+				height: 50px;
+				border: 1px solid #abdde7;
+				background: #eef8fa;
+				width:400px;
+				margin-right:10px;
+			}
+			.sure{
+				float: right;
+				height: 50px;
+				width: 100px;
+				line-height: 50px;
+				background: #a8a6f5;
+				text-align: center;
+				border-radius:10px ;
+				color: #fff;
+			}
+			.changeInput1,.changeInput2{
+				width:180px ;
+			}
+			.bottom{
+				height: 50px;
+			}
+			.shuru{
+				float: left;
+			}
+			.red{
+				color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="wrap">
+			<div class="box">
+				<div class="txt">妙味课堂是一支独具特色的IT培训团队，妙味反对传统IT教育枯燥乏味的教学模式，妙味提供一途中全新的快乐学习方法！目前主要针对的是javascript培训，同时还提供了css教程、javascript视频、js特效等，最新推出了外地学员们喜欢的javascript网络课程服务，同时还为处于javascript入门阶段的朋友录制了大量javascript视频，其中涉及了大量javascript基础知识，希望妙味课堂推出的javascript网络培训课程能带给大家更多惊喜。 </div>
+				<div class="right">
+					<img src="./images/img1.png">
+					<img src="./images/img2.png" class="none" style="display: none;">
+					<img src="./images/img3.png" class="none" style="display: none; margin-bottom: 0;">
+				</div>
+			</div>
+			<div class="tip">
+				<div class="btn">
+					<input type="button" value="查找" class="search"/>
+					<input type="button" value="替换" class="change"/>
+				</div>
+				<div class="bottom">
+					<div class="shuru">
+						<div class="content1">
+							<input type = "text" class="searchInput">		
+						</div>
+						<div class="content2">
+							<input type = "text" class="changeInput1">
+							<input type = "text" class="changeInput2">
+						</div>
+					</div>
+					<input type="button" value = "确认" class="sure">
+				</div>
+			</div>
+		</div>
+		
+		<script src="./js/utils.js"></script>
+		<script src="js/tihuan.js"></script>
+	</body>
+</html>

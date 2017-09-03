@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+				background: none;
+				border: none;
+				vertical-align:top;
+				color: inherit;
+				list-style: none;
+				text-decoration: none;
+			}
+			.box{
+				width: 700px;
+				height: 500px;
+				margin: 0 auto;
+				position: relative;
+				background: url(images/bg.png);
+			}
+			.box .list{
+				width: 402px;
+				position: absolute;
+				left: 149px;
+				top: 200px;
+				height: 120px;
+			}
+			li{
+				width: 120px;
+				height: 120px;
+				color: #FFFFFF;
+				text-align: center;
+				box-sizing: border-box;
+				font: 14px/200px "微软雅黑";
+				position: absolute;
+				top: 0;
+				background: url(images/1.png) no-repeat center; 
+			}
+			.list li:nth-child(1){
+				left: 0;
+				
+			}
+			.list li:nth-child(2){
+				left: 140px;
+			}
+			.list li:nth-child(3){
+				right: 0;
+			}
+			.box .establish,.box .delet{
+				position: absolute;
+				width: 120px;
+				height: 35px;
+				left: 289px;
+			}
+			.box .establish{
+				bottom: 102px;
+				background: url(images/establish.png);
+			}
+			.box .delet{
+				bottom: 46px;
+				background: url(images/delete.png);
+			}
+			input{
+				opacity: 0;
+				position: absolute;
+				left: 4px;
+				top: 4px;
+				
+			}
+			.active{
+				border-radius: 7px;
+				background-color: rgba(0,0,0,0.3);
+				border: 1px solid #b7a5c3;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<ul class="list"></ul>
+			<a class="establish" href="JavaScript:;"></a>
+			<a class="delet" href="JavaScript:;"></a>
+		</div>
+		
+		<script src="utils.js"></script>
+		<script>
+			var cj = $('.establish')[0]
+			var list = $('.list')[0]
+			var sc = $('.delet')[0]
+			var lis = document.getElementsByTagName('li')
+			var inputs = document.getElementsByTagName('input')
+			cj.onclick = function() {
+				if(lis.length > 2 ){
+					return
+				}
+				var li1 = document.createElement('li'); 
+				li1.innerHTML = '新建文件夹'
+				list.appendChild(li1)
+				var input1 = document.createElement('input');
+				input1.type = 'checkbox';
+				li1.appendChild(input1)
+				console.log(lis)
+				console.log(inputs)
+				for( var i = 0 ; i <lis.length ; i++ ){
+					lis[i].onmouseover = function(){
+						this.className = 'active'
+						this.firstElementChild.style.opacity = 1
+					}
+					lis[i].onmouseout = function(){
+						if( this.firstElementChild.checked === false ){
+							this.className = ''
+							this.firstElementChild.style.opacity = 0
+						}
+					}
+				}
+			}
+			sc.onclick = function  () {
+				for( var i = inputs.length-1 ; i >=0 ; i-- ){
+					var lis1 = inputs[i].parentNode
+					if( inputs[i].checked === true ){
+						lis1.remove()
+					}
+				}
+			}
+		
+		</script>
+	</body>
+</html>
