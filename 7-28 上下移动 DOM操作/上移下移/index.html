@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/main.css">
+	<!--<script src="js/jquery-3.1.1.js"></script>-->
+</head>
+<body>
+<section class="wrap">
+	<div class="wrap-left">
+		<ul class="list">
+			<li class="lis li1">
+				<span>jQuery</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up">上移</a>
+					<a href="javascript:;" class="down">下移</a>
+				</div>
+			</li>
+			<li class="lis li2">
+				<span>AJAX</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up">上移</a>
+					<a href="javascript:;" class="down">下移</a>
+				</div>
+			</li>
+			<li class="lis li3">
+				<span>JS基础-2</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up">上移</a>
+					<a href="javascript:;" class="down">下移</a>
+				</div>
+			</li>
+			<li class="lis li4">
+				<span>移动端实战</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up">上移</a>
+					<a href="javascript:;" class="down">下移</a>
+				</div>
+			</li>
+			<li class="lis li5">
+				<span>canvas游戏</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up">上移</a>
+					<a href="javascript:;" class="down">下移</a>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<div class="wrap-right">
+		<ul class="list">
+			<li>
+				<span>jQuery</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up"></a>
+					<a href="javascript:;" class="down"></a>
+				</div>
+			</li>
+			<li>
+				<span>小程序</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up"></a>
+					<a href="javascript:;" class="down"></a>
+				</div>
+			</li>
+			<li>
+				<span>jQuery</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up"></a>
+					<a href="javascript:;" class="down"></a>
+				</div>
+			</li>
+			<li>
+				<span>面向对象-上</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up"></a>
+					<a href="javascript:;" class="down"></a>
+				</div>
+			</li>
+			<li>
+				<span>面向对象-下</span>
+				<div class="btn">
+					<a href="javascript:;"  class="up"></a>
+					<a href="javascript:;" class="down"></a>
+				</div>
+			</li>
+		</ul>
+	</div>
+</section>
+
+<script src="../utils.js"></script>
+<script>
+	var down = $('.wrap-left .down')
+	var up = $('.wrap-left .up')
+	var list = $('.wrap-left .list')[0]
+	var lis = list.getElementsByTagName('li')
+	//上移
+	for( var i = 0 ; i < up.length; i++ ){
+		up[i].onclick = function(){
+			if( this.parentNode.parentNode.previousElementSibling ){//判断当前按钮的父级的父级有没有上一个兄弟元素，如果有就和上一个兄弟元素换top
+				mTween( this.parentNode.parentNode , {
+						top : this.parentNode.parentNode.previousElementSibling.offsetTop
+					} , 300)
+				mTween( this.parentNode.parentNode.previousElementSibling , {
+						top : this.parentNode.parentNode.offsetTop
+					} , 300)
+				list.insertBefore(this.parentNode.parentNode,this.parentNode.parentNode.previousElementSibling)//结构中也需要换位置
+			}else{//如果没有上一个兄弟元素，就和最后一个元素换top值 同时其他所有元素的top值都上移
+				mTween( this.parentNode.parentNode , {
+						top : list.lastElementChild.offsetTop
+					} , 300)
+				//简化后
+				//把出去自己点的li外的其他li。获取他们各自的top值。全部减62。这样更加灵活 删除或增加li的个数代码也不需要改变
+				for( var i = 1 ; i < lis.length ; i++ ){
+					mTween( lis[i] , {
+						top : lis[i].offsetTop - 62
+					} , 300)
+				}
+				list.appendChild(list.firstElementChild)//结构中也需要换位置
+				
+				
+//				mTween( list.lastElementChild , {
+//						top : list.lastElementChild.previousElementSibling.offsetTop
+//					} , 500)
+//				mTween( list.lastElementChild.previousElementSibling , {
+//						top : list.lastElementChild.previousElementSibling.previousElementSibling.offsetTop
+//					} , 500)
+//				mTween( list.lastElementChild.previousElementSibling.previousElementSibling , {
+//						top : list.lastElementChild.previousElementSibling.previousElementSibling.previousElementSibling.offsetTop
+//					} , 500)
+//				mTween( list.lastElementChild.previousElementSibling.previousElementSibling.previousElementSibling , {
+//						top : list.lastElementChild.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.offsetTop
+//					} , 500)
+				
+			}
+		}
+	}
+	//下移
+	for( var i = 0 ; i < down.length ; i++ ){
+		down[i].onclick = function(){
+			if( this.parentNode.parentNode.nextElementSibling ){//判断这个元素有没有下一个兄弟元素，如果有就和下一个兄弟元素换位置
+				mTween( this.parentNode.parentNode , {
+					top : this.parentNode.parentNode.nextElementSibling.offsetTop
+				} , 300)
+				mTween( this.parentNode.parentNode.nextElementSibling , {
+					top : this.parentNode.parentNode.offsetTop
+				} , 300)
+				list.insertBefore(this.parentNode.parentNode.nextElementSibling,this.parentNode.parentNode)//结构中也需要换
+			}else{//如果没有，就把当前元素插入到第一个元素的前面，同时把其他所有兄弟元素下移
+				mTween( this.parentNode.parentNode , {
+					top : list.firstElementChild.offsetTop
+				} , 300)
+				//console.log(list.firstElementChild.offsetTop)
+				
+				//简化后
+				//把出去自己点的li外的其他li。获取他们各自的top值。全部加62。这样更加灵活 删除或增加li的个数代码也不需要改变
+				for( var i = 0 ; i < lis.length-1 ; i++ ){
+					mTween( lis[i] , {
+						top : lis[i].offsetTop + 62
+					} , 300)
+				}
+				list.insertBefore(this.parentNode.parentNode,list.firstElementChild)//结构中也需要换位置
+				
+//				mTween( list.firstElementChild , {
+//					top : list.firstElementChild.nextElementSibling.offsetTop
+//				} , 500)
+//				mTween( list.firstElementChild.nextElementSibling , {
+//					top : list.firstElementChild.nextElementSibling.nextElementSibling.offsetTop
+//				} , 500)
+//				mTween( list.firstElementChild.nextElementSibling.nextElementSibling , {
+//					top : list.firstElementChild.nextElementSibling.nextElementSibling.nextElementSibling.offsetTop
+//				} , 500)
+//				mTween( list.firstElementChild.nextElementSibling.nextElementSibling.nextElementSibling , {
+//					top : list.firstElementChild.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.offsetTop
+//				} , 500)
+				
+				
+			}
+		}
+	}
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+*{
+	margin: 0;
+	padding: 0;
+}
+#wrap{
+	width:600px;
+	height: 500px;
+	background: #ffb746;
+	/*border-radius:10px;*/
+	border: 1px solid #000;
+	font-family: "微软雅黑";
+	
+	/*box-shadow:1px 1px 1px #000;*/
+}
+nav a{
+	display: inline-block;
+	width:146px;
+	height: 40px;
+	font-size: 16px;
+	text-align: center;
+	line-height: 40px;
+	color: #000;
+	text-decoration: none;
+	background: #fff;
+}
+a.active{
+	background: #ffb746;
+	color: #fff;
+}
+
+#box{
+	margin:20px;
+	height: 180px;
+}
+#box ul{
+	width:226px;
+	list-style: none;
+	float: left;
+}
+#box div{
+	display: none;
+}
+#box div.show{
+	display: block;
+}
+#box ul li{
+	height: 60px;
+	width
+}
+#box ul li.active{
+	background:#fff;
+}
+#box li p{
+	font-size: 14px;
+	color:#fff;
+	text-indent:2em;
+	line-height:2.5em;
+	height: 35px;
+}
+#box li.active p{
+	font-size: 16px;
+	color:#000;
+}
+#box li.active span{
+	color:#000;
+}
+img{
+	width:178px;
+	height: 178px;
+	display: block;
+	float: left;
+	border: 2px solid #fff;
+	display: none;
+}
+img.active{
+	display: block;
+}
+span{
+	font-size: 12px;
+	line-height: 20px;
+	text-indent:2.5em;
+	display: block;
+	color:#fff;
+}
+#box div{
+	height: 180px;
+	width:
+}
+
+</style>
+</head>
+<body>
+	<section id="wrap">
+		<nav id="nav">
+			<a href="javascript:;" class="active">专题</a>
+			<a href="javascript:;">视频</a>
+			<a href="javascript:;">图片</a>
+			<a href="javascript:;">体育</a>
+		</nav>
+		<div id="box">
+			<div class="show">
+				<img src="img/1.jpg" alt="" class="active"/>
+				<img src="img/2.jpg" alt=""/>
+				<img src="img/3.jpg" alt=""/>
+				<ul class="show">
+					<li  class="active">
+						<p>奇虎360纽交所上市11</p>
+						<span>2016-10-12</span>
+					</li>
+					<li>
+						<p>2011年IT领袖峰会</p>
+						<span>2016-10-12</span>
+					</li>
+					<li>
+						<p>CCBN召开 助三网融合</p>
+						<span>2016-10-12</span>
+					</li>
+				</ul>
+			</div>
+			
+			<div>
+				<img  class="active" src="img/4.jpg" alt=""/>
+				<img src="img/3.jpg" alt=""/>
+				<img src="img/1.jpg" alt=""/>
+				<img src="img/4.jpg" alt=""/>
+				<img src="img/3.jpg" alt=""/>
+				<img src="img/1.jpg" alt=""/>
+				<ul class="show">
+					<li  class="active">
+						<p>奇虎360纽交所上市222</p>
+						<span>2016-10-12</span>
+					</li>
+					<li>
+						<p>2011年IT领袖峰会</p>
+						<span>2016-10-12</span>
+					</li>
+					<li>
+						<p>CCBN召开 助三网融合</p>
+						<span>2016-10-12</span>
+					</li>
+					<li>
+						<p>奇虎360纽交所上市222</p>
+						<span>2016-10-12</span>
+					</li>
+					<li>
+						<p>2011年IT领袖峰会</p>
+						<span>2016-10-12</span>
+					</li>
+					<li>
+						<p>CCBN召开 助三网融合</p>
+						<span>2016-10-12</span>
+					</li>
+				</ul>
+			</div>
+			
+			<div>
+				<img   class="active" src="img/1.jpg" alt=""/>
+				<img src="img/2.jpg" alt=""/>
+				<img src="img/3.jpg" alt=""/>
+				<img src="img/2.jpg" alt=""/>
+				<ul class="show">
+					<li class="active">
+						<p>奇虎360纽交所上市333</p>
+						<span>2016-10-12</span>
+					</li>
+					<li>
+						<p>2011年IT领袖峰会</p>
+						<span>2016-10-12</span>
+					</li>
+					<li>
+						<p>CCBN召开 助三网融合</p>
+						<span>2016-10-12</span>
+					</li>
+					<li>
+						<p>CCBN召开 助三网融合</p>
+						<span>2016-10-12</span>
+					</li>
+				</ul>
+			</div>
+			<div>
+				<img   class="active" src="img/1.jpg" alt=""/>
+				<img src="img/2.jpg" alt=""/>
+				<ul class="show">
+					<li class="active">
+						<p>奇虎360纽交所上市333</p>
+						<span>2016-10-12</span>
+					</li>
+					<li>
+						<p>2011年IT领袖峰会</p>
+						<span>2016-10-12</span>
+					</li>
+				</ul>
+			</div>
+			
+		</div>
+	</section>
+<script src="../utils.js"></script>
+<script>
+	var box = $('#box')
+	var navA = $('a',$('#nav'))
+	var divs = $('div',box)
+	var tabNum = 0
+	var n = 0
+	var t = null
+	func()
+	function func(){
+		var lis = $('li',divs[tabNum])
+		var	imgs = $('img',divs[tabNum])
+		lis[n].className = 'active'
+		imgs[n].className = 'active'
+		t = setInterval(function(){
+			n++
+			for( var i = 0 ; i < lis.length ; i++ ){
+				lis[i].className = ''
+				imgs[i].className = ''
+			}
+			if( n > lis.length - 1 ){
+				clearInterval(t)
+				divs[tabNum].style.display = 'none'
+				navA[tabNum].className = ''
+				tabNum++
+				if( tabNum > divs.length - 1 ){
+					tabNum = 0
+				}
+				divs[tabNum].style.display = 'block'
+				navA[tabNum].className = 'active'
+				n = 0
+				func()
+				return
+			}
+			lis[n].className = 'active'
+			imgs[n].className = 'active'
+		},500)
+	}
+	
+	Array.from(divs).forEach(function( item ){
+		var liAll = $('li',item)
+		var imgAll = $('img',item)
+		for( var i = 0 ; i < liAll.length ; i++ ){
+			liAll[i].index = i
+			liAll[i].onmouseover = function(){
+				clearInterval(t)
+				for( var i = 0 ; i < liAll.length ; i++ ){
+					liAll[i].className = ''
+					imgAll[i].className = ''
+				}
+				this.className = 'active'
+				imgAll[this.index].className = 'active'
+			}
+			liAll[i].onmouseout = function(){
+				n = this.index
+				func()
+			}
+		}
+	})
+	
+	Array.from(navA).forEach(function( item , index ){
+		item.index = index
+		item.onmouseover = function(){
+			clearInterval(t)
+			for( var i = 0 ; i < navA.length ; i++ ){
+				navA[i].className = ''
+				divs[i].style.display = 'none'
+			}
+			this.className = 'active'
+			divs[this.index].style.display = 'block'
+			if(this.index===tabNum){
+				return;
+			}
+			var prevlis = $("li",divs[tabNum]);
+			var previmgs = $("img",divs[tabNum]);
+
+			for( var i = 0; i < prevlis.length; i++ ){
+				prevlis[i].className = "";
+				previmgs[i].className = "";
+			}
+			var li = $('li',divs[this.index])
+			var img = $('img',divs[this.index])
+			for( var i = 0 ; i < li.length ; i++ ){
+				li[i].className = ''
+				img[i].className = ''
+			}
+			li[0].className = 'active'
+			img[0].className = 'active'
+		}
+		item.onmouseout = function(){
+			if( this.index !== tabNum ){
+				tabNum = this.index
+				n = 0
+			}
+			func()
+		}
+	})
+	
+</script>
+</body>
+</html>
