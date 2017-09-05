@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			div{
+				width: 100px;
+				height: 100px;
+				background: red;
+				position: absolute;
+				top: 0;
+				left: 0;
+				
+			}
+			#div2{
+				background: pink;
+				top: 200px;
+				left: 200px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="div1"></div>
+		<div id="div2"></div>
+		
+		<script>
+			div1.onmousedown = function( ev ){
+				var disX = ev.clientX - div1.offsetLeft
+				var disY = ev.clientY - div1.offsetTop
+				document.onmousemove = function( ev ){
+					div1.style.left = ev.clientX - disX + 'px'
+					div1.style.top = ev.clientY - disY + 'px'
+					var div1Rect = div1.getBoundingClientRect()
+					var div2Rect = div2.getBoundingClientRect()
+					
+					if( div1Rect.right < div2Rect.left || div1Rect.bottom < div2Rect.top || div1Rect.left > div2Rect.right || div1Rect.top > div2Rect.bottom ){
+						console.log('没碰到')
+						div2.style.background = 'pink'
+					}else{
+						console.log('碰到了')
+						div2.style.background = '#000'
+					}
+					
+					document.onmouseup = function(){
+						document.onmousemove = null
+					}
+				}
+			}
+		</script>
+	</body>
+</html>

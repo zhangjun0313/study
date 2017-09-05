@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        td {
+            text-align: center;
+        }
+        .red{
+            background: red;
+        }
+        .color{
+            background-image: linear-gradient(135deg, #41c8ff 0, #41c8ff 25%,#46e6fe 75%);
+        }
+    </style>
+    <script>
+
+        //在页面加载完成的时候，把下面这个数据动态添加到表格中
+        
+        var data = [
+            {
+                 'id' : 1,
+                'username' : 'LEO',
+                'age' : 36,
+                'sex' : '男',
+                 'selected':false
+            },
+            {
+                'id' : 2,
+                'username' : 'MOMO',
+                'age' : 16,
+                'sex' : '男',
+                 'selected':false
+            },
+            {
+                'id' : 3,
+                'username' : 'DUODUO',
+                'age' : 29,
+                'sex' : '男',
+                 'selected':false
+            },
+            {
+                'id' : 4,
+                'username' : '勇升',
+                'age' : 46,
+                'sex' : '男',
+                 'selected':false
+            },
+            {
+                'id' : 5,
+                'username' : '小美',
+                'age' : 40,
+                'sex' : '女',
+                 'selected':false
+            }
+        ];
+
+        /*
+            1、根据数据生成表格。
+            2、数据的添加
+            3、全选、单选
+            4、单条删除，选中删除
+            5、排序（按年龄从大到小-从小到大）
+            6、如果是在排序的状态，添加后依然保持排序
+        */
+    </script>
+</head>
+
+<body>
+
+<form action="" name="form">
+    <p>
+        姓名:<input type="text" id="userName" name="username"/>
+    </p>
+    <p>
+        年龄:<input type="text" id="age" name="age"/>
+    </p>
+    <p>
+        性别: <select name="sex" id="sex">
+            <option value=" 男 ">男</option>
+            <option value="女">女</option>
+        </select>
+    </p>
+    <p>
+        <input type="button" id="add" value="添加" name="add"/>
+    </p>
+</form>
+    <input type="button" id="delectAll" value="删除选中"  class="btn"> 
+    <input type="button" value="年龄从小到大" id="ageSort"  class="btn"> 
+    <table id="tab1" width="100%" border="1">
+
+        <thead>
+        <tr>
+            <th>
+                <input id="checkAll" type="checkbox" /> 全选
+            </th>
+            <th>ID</th>
+            <th>姓名</th>
+            <th>年龄</th>
+            <th>性别</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+
+        <tbody id="content">
+            <!-- <tr>
+                <td>
+                    <input type="checkbox"/>
+                </td>
+                <td>1</td>
+                <td>LEO</td>
+                <td>36</td>
+                <td>男</td>
+                <td>
+                    <a href="javascript:;">删除</a>
+                </td>
+            </tr> -->
+        </tbody>
+
+    </table>
+    <script type="text/javascript">
+        
+    /*
+        需求：
+            1. 先把已有的数据渲染在页面中
+            2. 点击添加，要添加新数据并且添加新结构
+            3. 全选单选
+            4. 点击删除，删除当前这个结构并且还要删除对应的数据
+            5. 批量删除 删除页面中的结构和数据
+            6. 按年龄排序
+
+        步骤：
+            1. 先把已有的数据渲染在页面中
+            2. 点击添加按钮
+                姓名和年龄不能为空
+                tbody中有新添加的数据的结构
+                    tr td
+                data中也要添加上新添加这条是数据
+                    {
+                        id
+                        ...
+                    }
+
+                判断是否点击过排序按钮
+                        点过，就要按照排序的方式
+                        没点过 追加
+
+            3. 全选单选
+                都要获取到元素
+
+            4. 删除
+                tbody.removeChild(tr);
+                删除数据
+                    通过id删除
+
+            6. 排序
+                    如果单条是选中的，排序后依然是选中的
+
+                    可以给每条数据添加上一个状态
+                            selected:true/false
+
+
+    */
+
+    //先把数据渲染在结构中
+    /*
+        {
+            'id' : 5,
+            'username' : '小美',
+            'age' : 40,
+            'sex' : '女'
+        }
+    */
+   	var content = document.getElementById('content')
+	var checkAll = document.getElementById('checkAll')
+    var add = document.getElementById('add')
+    var userName = document.getElementById('userName')
+    var age = document.getElementById('age')
+    var sex = document.getElementById('sex')
+    var num = document.getElementsByClassName('num')
+    var delectAll = document.getElementById('delectAll')
+    var inputs = content.getElementsByTagName('input')
+    var ageSort = document.getElementById('ageSort')
+    var n = 5
+    var m = 0
+    
+    func()
+    //添加点击事件
+    add.onclick = function( index ){
+    	if( age.value == '' || userName.value == '' ){
+    		alert('不能添加空')
+    		return
+    	}
+    	n++
+		data.push( {
+			'id':n,
+			'username':userName.value,
+			'age':age.value,
+			'sex':sex.value,
+			 'selected':false
+		} )
+		func()
+		
+		data.forEach(function( item , index ){
+			if(item.selected == true){
+				inputs[index].checked = true
+			}
+			
+		})
+		if( ageSort.a ){
+			data.sort( function( item1 , item2 ){
+	   			return item1.age - item2.age
+	 	  	} )
+	   		func()
+		}
+		if( ageSort.b ){
+			data.sort( function( item1 , item2 ){
+	   			return item2.age - item1.age
+	 	  	} )
+	   		func()
+		}
+    }
+   	
+   	
+   	//多选框选择删除
+   	delectAll.onclick = function(){
+   		for( var i = 0 ; i < inputs.length ; i++ ){
+   			if( inputs[i].checked ){
+   				if(inputs[i]){
+					var tdId = inputs[i].parentNode.parentNode.children[1];
+					data.forEach(function(item,index){
+						if(item.id == tdId.innerHTML){
+							data.splice(index,1)
+						}
+					})
+					inputs[i].parentNode.parentNode.remove()
+					i--
+				}
+   			}
+   		}
+   		m = 0
+   		func()
+   		checkAll.checked = false
+   	}
+   	
+   	
+   	//排序
+   	ageSort.kaiguan = false
+   	ageSort.onclick = function(){
+   		
+   		if( ageSort.kaiguan ){
+   			data.sort( function( item1 , item2 ){
+	   			return item2.age - item1.age
+	   		} )
+   			ageSort.kaiguan = false
+   			ageSort.b = true
+	   		func()
+   		}else{
+   			data.sort( function( item1 , item2 ){
+	   			return item1.age - item2.age
+	   		} )
+   			ageSort.kaiguan = true
+   			ageSort.a = true
+	   		func()
+   		}
+   	}
+   	
+   	//全选
+   	checkAll.onclick = function(){
+   		if( checkAll.checked ){
+   			for( var i = 0 ; i < inputs.length ; i++ ){
+	   			inputs[i].checked = true
+	   			data.forEach(function( item ){
+	   				item.selected = true
+	   			})
+	   		}
+   		}else{
+   			for( var i = 0 ; i < inputs.length ; i++ ){
+	   			inputs[i].checked = false
+	   			data.forEach(function( item ){
+	   				item.selected = false
+	   			})
+	   		}
+   		}
+   		
+   	}
+   
+   
+   
+
+
+//生成结构函数
+function func(){
+	var html = ''
+	content.innerHTML = ''
+	html = data.map(function( item , index ){
+	return `<tr style="background:${ index % 2 === 0 ? 'greenyellow' : '' };">
+                <td>
+                    <input type="checkbox"/>
+                </td>
+                <td class="num">${item.id}</td>
+                <td>${item.username}</td>
+                <td>${item.age}</td>
+                <td>${item.sex}</td>
+                <td>
+                    <a href="javascript:;">删除</a>
+                </td>
+        	</tr>`
+	})
+    content.innerHTML = html.join('')
+    
+        //删除点击事件
+    var allA = content.getElementsByTagName('a')
+    //console.log(allA)
+    for( var i = 0 ; i < allA.length ; i++ ){
+    	allA[i].index = i
+    	allA[i].onclick = function(){
+    		this.parentNode.parentNode.remove()
+    		data.splice( this.index , 1 )
+    		
+    		func()
+    		data.forEach(function( item , index ){
+				if(item.selected == true){
+					inputs[index].checked = true
+				}
+				
+			})
+    	}
+    }
+    //判断是否全选
+    var inputs = content.getElementsByTagName('input')
+    for( var i = 0 ; i < inputs.length ; i++ ){
+    	inputs[i].kaiguan = false
+    	inputs[i].onclick = function(){
+    		if( this.kaiguan ){
+    			this.kaiguan = false
+    			this.selected = false
+    			console.log(this.kaiguan,this.selected)
+    			m--
+    			console.log(m)
+    			if( m < data.length ){
+    				checkAll.checked = false
+    			}
+    		}else{
+    			this.kaiguan = true
+    			this.selected = true
+    			console.log(this.kaiguan,this.selected)
+    			m++
+    			console.log(m)
+    			if( m >= data.length ){
+    				checkAll.checked = true
+    			}
+    		}
+    	}
+    }  
+}
+
+
+    </script>
+</body>
+</html>

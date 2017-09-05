@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        td {
+            text-align: center;
+        }
+        .red{
+            background: red;
+        }
+        .color{
+            background-image: linear-gradient(135deg, #41c8ff 0, #41c8ff 25%,#46e6fe 75%);
+        }
+    </style>
+    <script>
+
+        //在页面加载完成的时候，把下面这个数据动态添加到表格中
+       
+
+        /*
+            1、根据数据生成表格。
+            2、数据的添加
+            3、全选、单选
+            4、单条删除，选中删除
+            5、排序（按年龄从大到小-从小到大）
+            6、如果是在排序的状态，添加后依然保持排序
+        */
+    </script>
+</head>
+
+<body>
+
+<form action="" name="form">
+    <p>
+        姓名:<input type="text" id="userName" name="username"/>
+    </p>
+    <p>
+        年龄:<input type="text" id="age" name="age"/>
+    </p>
+    <p>
+        性别: <select name="sex" id="sex">
+            <option value=" 男 ">男</option>
+            <option value="女">女</option>
+        </select>
+    </p>
+    <p>
+        <input type="button" id="add" value="添加" name="add"/>
+    </p>
+</form>
+    <input type="button" id="delectAll" value="删除选中"  class="btn"> 
+    <input type="button" value="年龄从小到大" id="ageSort"  class="btn"> 
+    <table id="tab1" width="100%" border="1">
+
+        <thead>
+        <tr>
+            <th>
+                <input id="checkAll" type="checkbox" /> 全选
+            </th>
+            <th>ID</th>
+            <th>姓名</th>
+            <th>年龄</th>
+            <th>性别</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+
+        <tbody id="box">
+            <!-- <tr>
+                <td>
+                    <input type="checkbox"/>
+                </td>
+                <td>1</td>
+                <td>LEO</td>
+                <td>36</td>
+                <td>男</td>
+                <td>
+                    <a href="javascript:;">删除</a>
+                </td>
+            </tr> -->
+        </tbody>
+
+    </table>
+    <script src="../utils.js"></script>
+    <script src="./data.js"></script>
+    <script type="text/javascript">
+    	var box = $('#box')
+    	var add = $('#add')
+    	var checkAll = $('#checkAll')
+    	var inputs = $('input',box)
+    	var delectAll = $('#delectAll')
+    	var ageSort = $('#ageSort')
+    	var n = data.length
+    	//----------------------------渲染结构-----------------------------------
+    	func()
+    	function func(){
+    		var html = data.map( function( item , index ){//隔行变色
+	    		return `
+	    			<tr data-id="${item.id}" style="background:${ index % 2 === 0 ? 'greenyellow' : '' };">
+		                <td>
+		                    <input ${item.checked ? 'checked' : ''} type="checkbox"/>
+		                </td>
+		                <td>${item.id}</td>
+		                <td>${item.username}</td>
+		                <td>${item.age}</td>
+		                <td>${item.sex}</td>
+		                <td>
+		                    <a data-id="${item.id}" href="javascript:;">删除</a>
+		                </td>
+		            </tr>
+	    		`
+	    	} )
+	    	
+	    	box.innerHTML = html.join('')
+    	}
+    	
+    	
+    	box.onclick = function( ev ){//事件委托
+    		//-----------------------------------点击删除------------------------------
+    		if( ev.target.nodeName === 'A' ){
+    			ev.target.parentNode.parentNode.remove()
+    			var id = ev.target.dataset.id
+    			//console.log(id)
+    			deleteById( id )
+    			console.log(data)
+    			//func()
+    			if(!inputs.length){//如果没有input了  那么久让全选按钮不能选，并return不往下走
+                    checkAll.disabled = true;
+                    checkAll.checked = false;
+                    return;
+               }
+    			if( whoSelect().length === inputs.length ){//如果input全部选中那么全选按钮也被选中
+    				checkAll.checked = true
+    			}else{//如果有一个没被选中那么全选按钮也不被选中
+    				checkAll.checked = false
+    			}
+    		}else if( ev.target.nodeName === 'INPUT' ){
+    			if( whoSelect().length === inputs.length ){//如果input全部选中那么全选按钮也被选中
+    				checkAll.checked = true
+    			}else{//如果有一个没被选中那么全选按钮也不被选中
+    				checkAll.checked = false
+    			}
+    			var id1 = ev.target.parentNode.parentNode.dataset.id;
+                getDateById(id1).checked = ev.target.checked;
+    		}
+    	}
+    	//-----------------------------------点击添加------------------------------
+    	add.onclick = function(){
+    		var userName = $('#userName')
+    		var age = $('#age')
+    		var sex = $('#sex')
+    		if( userName.value ==='' || age.value === '' ){//如果为空则提醒不能为空，并不执行下面代码
+    			alert('不能添加为空')
+    			return
+    		}
+    		n++
+    		//为data增加数据，重新渲染结构
+    		data.push( {
+    			'id' : n ,
+    			'username' : userName.value.trim() ,
+    			'age' : age.value.trim() ,
+    			'sex' : sex.value.trim()
+    		} )
+    		console.log(data)
+    		if( ageSort.isSort ){//如果点击过排序走进这里
+    			if( ageSort.sort ){
+    				data.sort(function (a,b){
+                        return a.age - b.age;
+                    })
+    			}else{
+    				data.sort(function (a,b){
+                        return b.age - a.age;
+                    })
+    			}
+    		}
+    		func()
+    		checkAll.checked = false
+    	}
+    	//--------------------------------------------全选---------------------------------
+    	checkAll.onclick = function(){//让所有input的checked等于全选按钮的checked
+    		for( var i = 0 ; i < inputs.length ; i++ ){
+    			inputs[i].checked = this.checked
+    			var id = inputs[i].parentNode.parentNode.dataset.id;
+                getDateById(id).checked = this.checked;    
+    		}
+    	}
+    	
+    	//-----------------------------批量删除-------------------------------
+    	delectAll.onclick = function(){
+    		var newArr = whoSelect()
+    		if( newArr.length === 0 ){//如果没有input被选中  那么提醒
+    			alert('请选中要删除的内容')
+    		}else{
+    			for( var i = 0 ; i < newArr.length ; i++ ){//删除tr结构及数据
+    				newArr[i].parentNode.parentNode.remove()
+    				deleteById( newArr[i].parentNode.parentNode.dataset.id )
+    			}
+    			if(!inputs.length){//如果没有input了 那么全选按钮不能被点击并且为false
+                    checkAll.disabled = true;
+                    checkAll.checked = false;
+                }
+    		}
+    	}
+    	
+    	
+    	//----------------------------------排序-------------------------------
+    	ageSort.onclick = function(){
+    		this.isSort = true//判断是否点击过这个按钮
+    		if(this.sort) { // 从大到小排
+                data.sort(function (a,b){
+                    return b.age - a.age;
+                })
+                this.value = '年龄从小到大'
+                this.sort = false;
+    		}else{
+    			data.sort(function (a,b){
+                    return a.age - b.age;
+                })
+                this.value = '年龄从大到小'
+                this.sort = true;
+    		}
+    		func()
+    	}
+    		
+    	
+    	//把选中的inputpush进一个数组中。并return出去
+    	function whoSelect(){
+    		var newArr = []
+    		for( var i = 0 ; i < inputs.length ; i++ ){//循环所有input如果有被选中的就push进新数组中
+				if( inputs[i].checked ){
+					newArr.push( inputs[i] )
+				}
+			}
+    		return newArr
+    	}
+    	
+    	
+    	function deleteById( id ){
+    		data = data.filter(function (item){//过滤  把ID不一样的过滤出来
+                return item.id != id
+            })
+    	}
+    	
+    	function getDateById(id){
+	       return data.filter(function (item){
+	           return item.id == id;    
+	       })[0];
+	    }
+    </script>
+</body>
+</html>

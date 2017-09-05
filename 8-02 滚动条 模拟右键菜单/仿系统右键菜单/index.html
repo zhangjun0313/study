@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				padding: 0;
+				margin: 0;
+				list-style: none;
+			}
+			body{
+				background: url(img/wrap.png) no-repeat; 
+				background-size: 100% auto;
+				position: relative;
+			}
+			
+			.box{
+				width: 180px;
+				height: 200px;
+				background: #FFFFFF;
+				position: absolute;
+				left: 0;
+				top: 0;
+				display: none;
+			}
+			.box li{
+				height: 50px;
+				color: #f5726c;
+				font: 16px/50px "微软雅黑";
+			}
+			span{
+				display: inline-block;
+				width: 19px;
+				height: 19px;
+				margin: 0 20px;
+			}
+			.span1{
+				background: url(img/down.png) no-repeat;
+			}
+			.span2{
+				background: url(img/delete.png) no-repeat;
+			}
+			.span3{
+				background: url(img/move.png) no-repeat;
+			}
+			.span4{
+				background: url(img/repeat.png) no-repeat;
+			}
+			.active{
+				background:#fde9e9;
+			}
+		</style>
+	</head>
+	<body>
+		<ul class="box">
+			<li><span class="span1"></span>下载</li>
+			<li><span class="span2"></span>删除</li>
+			<li><span class="span3"></span>移动到……</li>
+			<li><span class="span4"></span>重命名</li>
+		</ul>
+		<script>
+			var box = document.getElementsByClassName('box')[0]
+			var lis = box.getElementsByTagName('li')
+			document.addEventListener('contextmenu',function( ev ){
+				box.style.display = 'block'
+				if( document.documentElement.clientWidth - ev.pageX >= box.offsetWidth ){
+					box.style.left = ev.pageX + 'px'
+				}else{
+					box.style.left = ev.pageX - box.offsetWidth + 'px'
+				}
+				
+				if( document.documentElement.clientHeight - ev.pageY >= box.offsetHeight ){
+					box.style.top = ev.pageY + 'px'
+				}else{
+					box.style.top = ev.pageY - box.offsetHeight + 'px'
+				}
+				ev.preventDefault()
+			})
+			for( var i = 0 ; i < lis.length ; i++ ){
+				lis[i].addEventListener('mouseover',function(){
+					this.style.background = 'pink'
+				})
+				lis[i].addEventListener('mouseout',function(){
+					this.style.background = ''
+				})
+			}
+			document.addEventListener('click',function(){
+				box.style.display = 'none'
+			})
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+//			document.oncontextmenu = function(){
+//				box.style.display = 'block'
+//				return false
+//			}
+			
+		</script>
+	</body>
+</html>

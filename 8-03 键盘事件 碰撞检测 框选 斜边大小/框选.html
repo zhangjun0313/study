@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.box{
+				width: 0px;
+				height: 0px;
+				background: #000;
+				opacity: .3;
+				position: absolute;
+				top: 0;
+				left: 0;
+				display: none;
+			}
+			.div1{
+				width: 100px;
+				height: 100px;
+				background: red;
+				margin-bottom: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="div1"></div>
+		<div class="div1"></div>
+		<div class="div1"></div>
+		<div class="div1"></div>
+		<div class="div1"></div>
+		<div class="box"></div>
+		
+		<script>
+			var box = document.getElementsByClassName('box')[0]
+			var divs = document.getElementsByClassName('div1')
+			document.onmousedown = function( ev ){
+				box.style.display = 'block'
+				var disX = ev.clientX
+				var disY = ev.clientY
+				//box.style.top = disY + 'px'
+				//box.style.left = disX + 'px'
+				document.onmousemove = function( ev ){
+					if( Math.abs( ev.clientX - disX ) < 30 ){
+						box.style.display = 'none'
+					}else{
+						box.style.display = 'block'
+						box.style.width = Math.abs( ev.clientX - disX ) + 'px'
+					}
+					if( Math.abs( ev.clientY - disY ) < 30 ){
+						box.style.display = 'none'
+					}else{
+						box.style.display = 'block'
+						box.style.height = Math.abs( ev.clientY - disY ) + 'px'
+					}
+					
+					
+					box.style.top = Math.min( ev.clientY , disY ) + 'px'
+					box.style.left = Math.min( ev.clientX , disX ) + 'px'
+					
+					
+					var boxRect = box.getBoundingClientRect()
+					for( var i = 0 ; i < divs.length ; i++ ){
+						var div2Rect = divs[i].getBoundingClientRect()
+						if( boxRect.right < div2Rect.left || boxRect.bottom < div2Rect.top || boxRect.left > div2Rect.right || boxRect.top > div2Rect.bottom ){
+							console.log('没碰到')
+							divs[i].style.background = 'red'
+						}else{
+							console.log('碰到了')
+							divs[i].style.background = '#000'
+						}
+					}
+					
+					
+					
+					
+					
+				}
+				document.onmouseup = function(){
+						document.onmousemove = null
+						box.style.display = 'none'
+						box.style.width = 0
+						box.style.height = 0
+					}
+				ev.preventDefault()
+			}
+		</script>
+	</body>
+</html>

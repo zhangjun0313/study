@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			div {
+				width: 100px;
+				height: 100px;
+				float: left;
+				margin: 30px;
+				background: red;
+			}
+			.box {
+				display: block;
+				width: 200px;
+				height: 200px;
+				border:  1px dashed #000;
+				opacity: 0.3;
+				position: absolute;
+				left: 0;
+				top; 0;
+				background: yellow;
+				margin: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<span class="box"></span>
+		
+		<script>
+			var box = document.getElementsByClassName('box')[0]
+			var divs = document.getElementsByTagName('div')
+			box.onmousedown = function( ev ){
+				var disX = ev.clientX - box.offsetLeft
+				var disY = ev.clientY - box.offsetTop
+				document.onmousemove = function( ev ){
+					box.style.left = ev.clientX - disX + 'px'
+					box.style.top = ev.clientY - disY + 'px'
+					var arr = []
+					for( var i = 0 ; i < divs.length ; i++ ){
+						divs[i].style.background = 'red'
+						if( collision( box , divs[i] ) ){
+							arr.push( divs[i] )
+						}
+					}
+					var boxX = box.offsetLeft + box.offsetWidth / 2
+					var boxY = box.offsetTop + box.offsetHeight / 2
+					var min = 999999999999999999999999
+					var oDiv = null
+					for( var i = 0 ; i < arr.length ; i++ ){
+						var x = arr[i].offsetLeft + arr[i].offsetWidth / 2
+						var y = arr[i].offsetTop + arr[i].offsetHeight / 2
+						var chaX = x - boxX
+						var chaY = y - boxY
+						var xiebian = chaX * chaX + chaY * chaY
+						if( min > xiebian ){
+							min = xiebian
+							oDiv = arr[i]
+						}
+					}
+					if( oDiv ){
+						oDiv.style.background = 'blue'
+					}
+				}
+				document.onmouseup = function(){
+					document.onmousemove = null
+					
+				}
+				ev.preventDefault();
+			}
+			
+			function collision(obj1,obj2){
+				var obj1Rect = obj1.getBoundingClientRect();	
+				var obj2Rect = obj2.getBoundingClientRect();	
+
+				if(obj1Rect.right < obj2Rect.left || obj1Rect.bottom < obj2Rect.top || obj1Rect.left > obj2Rect.right || obj1Rect.top > obj2Rect.bottom){
+					return false;
+				}else{
+					return true;
+				}
+			}
+		</script>
+	</body>
+</html>

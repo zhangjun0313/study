@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			ul{
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+			.box{
+				width: 500px;
+				height:600px;
+				background: url(images/bg.png) no-repeat;
+				position: relative;
+			}
+			.selector{
+				box-sizing: border-box;
+				width:346px;
+				height:46px;
+				background: #fff;
+				border-radius: 20px;
+				position: absolute;
+				left: 77px;
+				top:230px;
+				padding: 5px;
+				z-index: 5;
+				cursor: pointer;
+			}
+			.search-bar{
+				float: left;
+				width:268px;
+				height:34px;
+				border: 1px solid #c9c9d5;
+				background: #d9d9e2;
+				border-radius: 20px;
+				position: relative;
+				
+			}
+			.search{
+				width:23px;
+				height: 23px;
+				background: url(images/search.png) no-repeat;
+				position: absolute;
+				top:6px;
+				left: 8px;
+			}
+			.text{
+				float: left;
+				width:268px;
+				height:34px;
+				text-indent: 45px;
+				line-height: 34px;
+			}
+			.go{
+				float: left;
+				width:60px;
+				height: 36px;
+				background: #fd635e;
+				color: #fff;
+				text-align: center;
+				line-height: 36px;
+				border-radius: 16px;
+				margin-left: 5px;
+			}
+			.content{
+				width:340px;
+				padding:52px 0 0 6px;
+				background: #e4e4fe;
+				position: absolute;
+				left: 77px;
+				top:230px;
+				border-radius: 20px;
+				display: none;
+			}
+			.content li{
+				width:255px;
+				height: 30px;
+				padding-left: 15px;
+				border-radius: 16px;
+				margin-bottom: 6px;
+				line-height: 30px;
+			}
+			.active{
+				background: #fd635e;
+				color: #fff;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<div class="box">
+			
+			<div class="selector">
+				<span class="search-bar">
+					<span class="search"></span>
+					<span class="text"></span>
+				</span>
+				<span class="go">GO</span>
+			</div>
+			<ul class="content">
+				<li>第七个读者</li>
+				<li>心理罪 画像</li>
+				<li>心理罪 教化场</li>
+				<li>心理罪 城市之光</li>
+				<li>地球往事</li>
+			</ul>
+			
+		</div>
+		
+		
+		
+		<script>
+			var txt = document.getElementsByClassName('text')[0]
+			var list = document.getElementsByClassName('content')[0]
+			var lis = list.getElementsByTagName('li')
+			txt.addEventListener('click',function(){
+				list.style.display = 'block'
+			})
+			for( var i = 0 ; i < lis.length ; i++ ){
+				lis[i].a = false
+				lis[i].addEventListener('mouseover',function(){
+					this.style.background = 'red'
+					this.style.color = '#fff'
+				})
+				lis[i].addEventListener('mouseout',function(){
+					if( !this.a ){
+						this.style.background = ''
+						this.style.color = ''
+						this.a = false
+					}
+				})
+				lis[i].addEventListener('click',function(){
+					for( var i = 0 ; i < lis.length ; i++ ){
+						lis[i].style.background = ''
+						lis[i].style.color = ''
+						lis[i].a = false
+					}
+					this.style.background = 'red'
+					this.style.color = '#fff'
+					this.a = true
+					txt.innerHTML = this.innerHTML
+					list.style.display = 'none'
+				})
+			}
+			
+		</script>
+	</body>
+</html>

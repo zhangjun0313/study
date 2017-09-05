@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="reset.css" />
+		<style>
+			.wrap{
+				width: 1200px;
+				height: 800px;
+				background: url(images/bg.png) no-repeat;
+				margin: 0 auto;
+				position: relative;
+			}
+			.screen{
+				width: 639px;
+				height: 380px;
+				position: absolute;
+				left: 281px;
+				top: 214px;
+			}
+			#btn{
+				width: 96px;
+				height: 38px;
+				border: 2px solid #fff;
+				color: #fff;
+				border-radius: 5px;
+				position: absolute;
+				left: 26px;
+				top: 170px;
+			}
+			.box{
+				width: 480px;
+				height: 360px;
+				position: absolute;
+				left: 159px;
+				top: 20px;
+			}
+			.box li{
+				position: absolute;
+				left: 0;
+				top: 0;
+			}
+			img{
+				width: 100px;
+				height: 100px;
+			}
+			
+			
+		</style>
+	</head>
+	<body>
+		<div class="wrap">
+			<div class="screen clearfix">
+				<input type="button" value="随机" id="btn"/>
+				<ul class="box clearfix">
+				</ul>
+			</div>
+		</div>
+		
+		
+		
+		<script src="utils.js"></script>
+		<script>
+			var box = $('.box')[0]
+			var btn = $('#btn')
+			var html = ''
+			for (var i = 0; i < 12; i++) {
+				html +=`<li style="left:${i%4*120}px; top:${Math.floor(i/4)*120}px;"><img src="images/${i+1}.png"/></li>`
+			}
+			box.innerHTML = html
+			var lis = box.getElementsByTagName('li')
+			console.log(lis)
+			
+			for( var i = 0 ; i < lis.length ; i++ ){
+				lis[i].index = i
+				lis[i].onmousedown = function( ev ){
+					this.style.zIndex = 999
+					var thiss = this
+					var disX = ev.clientX - this.offsetLeft;
+					var disY = ev.clientY - this.offsetTop;
+					var oldLiL = thiss.offsetLeft
+					var oldLiT = thiss.offsetTop
+					document.onmousemove = function( ev ){
+						thiss.style.left = ev.clientX - disX + 'px';
+						thiss.style.top = ev.clientY - disY + 'px';
+					}
+					document.onmouseup = function (){
+						document.onmousemove = null;
+						var arr =[]
+						for (var i = 0; i < lis.length; i++) {
+							if (lis[i] == lis[thiss.index]) {
+								continue;
+							}
+							if (collision(lis[thiss.index],lis[i])) {
+								arr.push(lis[i])
+							}
+						}
+						if( arr.length > 0 ){
+							var boxX = thiss.offsetLeft + thiss.offsetWidth/2;
+							var boxY = thiss.offsetTop + thiss.offsetHeight/2;
+							var oDiv = null
+							var min = 99999999;
+							for( var i = 0; i < arr.length; i++ ){
+								// 找碰上的元素的中心点坐标
+								var x = arr[i].offsetLeft + arr[i].offsetWidth/2;
+								var y = arr[i].offsetTop + arr[i].offsetHeight/2;
+		
+								var chaX = x - boxX;
+								var chaY = y - boxY;
+		
+								var xiebian = chaX * chaX + chaY*chaY;
+		
+								if(min>=xiebian){
+									min = xiebian;
+									oDiv = arr[i]
+								}
+		
+							}
+							var newLiL = oDiv.offsetLeft
+							var newLiT = oDiv.offsetTop
+							mTween( thiss , {
+								left : newLiL,
+								top : newLiT
+							} , 300 )
+							mTween( oDiv , {
+								left : oldLiL,
+								top : oldLiT
+							} , 300 )
+							thiss.style.zIndex = ''
+						}else{
+							mTween( thiss , {
+								left : oldLiL,
+								top : oldLiT
+							} , 300 )
+						}
+					}
+	
+					ev.preventDefault();
+				}
+			}
+			
+			
+			
+			
+			
+			function collision(obj1,obj2){
+				var obj1Rect = obj1.getBoundingClientRect();	
+				var obj2Rect = obj2.getBoundingClientRect();	
+
+				if(obj1Rect.right < obj2Rect.left || obj1Rect.bottom < obj2Rect.top || obj1Rect.left > obj2Rect.right || obj1Rect.top > obj2Rect.bottom){
+					return false;
+				}else{
+					return true;
+				}
+			}
+			
+
+			
+
+			
+			btn.onclick = function(){
+				var lis = box.getElementsByTagName('li');
+				var l = Array.from(lis)
+				l.sort(function(a,b){
+					return Math.random()-0.5
+				})
+				for (var i = 0; i < l.length; i++) {
+					mTween(l[i],{
+						top:Math.floor(i/4)*120,
+						left :  i%4*120
+					},300)
+				}
+			}
+
+		</script>
+	</body>
+</html>
