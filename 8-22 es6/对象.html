@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="box"></div>
+		
+		<script>
+			
+//			let a = 10
+//			//平常写法
+//			let obj1 = {
+//				b:1,
+//				a:a,
+//				fn:function(){
+//					console.log(111)
+//				}
+//			}
+//			console.log(obj1)
+//			//简写
+//			let obj2 = {
+//				b:1,
+//				a,
+//				fn(){
+//					console.log(111)
+//				}
+//			}
+//			console.log(obj2)
+			//更方便的动态改写key值   key是字符串
+//			let a = 'zhangjun'
+//			let obj1 = {
+//				[a]:a,
+//				[{b:1}]:a
+//			}
+//			console.log(obj1)
+
+
+			//不相等
+			//console.log(NaN===NaN)
+			//console.log(NaN==NaN)
+			//相等
+//			console.log(0===-0)
+//			console.log(0==-0)
+			//Object.is()方法  做比较的  相等返回true  不相等返回false
+//			console.log(Object.is(NaN,NaN))//相等 返回true
+//			console.log(Object.is(1,1))//相等 返回true
+//			console.log(Object.is(0,-1))//不相等 返回的false
+//			console.log(Object.is({},{}))//不相等 返回的false
+//			function fn({w=100,h=100,b='red'}){
+//				box.style.width = w+'px'
+//				box.style.height = h+'px'
+//				box.style.background = b
+//			}
+//			fn({})
+//			//fn(200,200,'yellow')
+//			fn({
+//				b:'yellow'
+//			})
+
+
+			//Object.assign()方法    把多个obj合并成一个  如果key值相同的话  就覆盖之前的值
+//			function fn(obj){
+//				
+//				let a = {
+//					w:100,
+//					h:100,
+//					b:'red'
+//				}
+//				Object.assign(a,obj)
+//				box.style.width = a.w+'px'
+//				box.style.height = a.h+'px'
+//				box.style.background = a.b
+//			}
+//			fn({
+//				w:1000
+//			})
+			
+			
+			
+//			let obj1 = {
+//				a:1
+//			}
+//			let obj2 = {
+//				b:1
+//			}
+//			let obj3 = {
+//				c:1
+//			}
+//			let obj4 = {
+//				a:10
+//			}
+			//返回值是目标对象 也就是第一个参数
+//			let obj = Object.assign(obj1,obj2,obj3,obj4)
+//			console.log(obj)
+//			console.log(obj===obj1)    true
+
+			//潜复制   
+//			let obj = {
+//				a:1,
+//				b:2
+//			}
+//			let a = Object.assign({},obj)
+//			console.log(a)
+//			let obj = {
+//				a:1,
+//				b:2,
+//				c:[1,2,3,4,5]
+//			}
+//			let a = Object.assign({},obj)
+//			
+//			a.c.push(10000)
+//			console.log(a)
+//			console.log(obj)
+		</script>
+	</body>
+</html>

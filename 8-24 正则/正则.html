@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<input id="txt" />
+		<span id="span"></span>
+		
+		<script>
+			//正则表达式
+			//查找匹配某些符合规则的字符串，正则表达式就是写这种规则的工具
+
+//				正则通常被用来检索、替换那些符合某个模式(规则)的文本。
+//				
+//				正则只能作用在字符串上
+//					
+//				定义正则表达式
+//					1. 字面量形式(推荐)
+//						/规则表达式/[修饰符]
+//
+//						规则可以写上普通的字符串
+//						
+//					2. 利用构造函数
+//						new RegExp(规则(字符串),[修饰符])
+//						当规则是存在变量中的，需要用构造函数的形式
+			
+			
+//			let str = 'miaov'
+//			let re1 = /m/
+//			let re2 = new RegExp('m')
+//			console.log(re1,re2)
+//			let name = 'm'
+//			let re3 = new RegExp(name)
+//			console.log(re3)
+
+
+//			re.test(str)
+//					作用
+//						用来检测指定的字符串是否符合正则的规则
+//					语法
+//						boolean regexObj.test(string)
+//					参数
+//						字符串
+//
+//					返回值
+//						符合规则返回true，不符合返回false
+			
+//			let re = /\d/
+//			txt.oninput = function(){
+//				if( re.test(this.value) ){
+//					span.innerHTML = '输入了数字'
+//				}else{
+//					span.innerHTML = '没输入了数字'
+//				}
+//			}
+
+//			str.match(str|re)
+//
+//					作用
+//						检索指定字符串或正则表达式匹配到的字符串
+//					语法
+//						Array|Null string.match(string|regexObj)
+//					参数
+//						string|regexObj
+//						字符串或正则表达式
+//					返回值
+//						返回数组---把匹配到的字符串放在数组中
+//						没有检索到返回null
+
+
+
+
+//			let str = 'miao456v'
+//			let re = /\d/
+//			let re2 = /\d+/
+//			let re3 = /\d/g
+//			console.log(str.match(re))
+//			console.log(str.match(re2))
+//			console.log(str.match(re3))
+//			
+//			
+//			let str = 'miaov\'"ketang'
+//			console.log(str)
+//			console.log('通知：\t你好')
+//			console.log('通知：\n\t你好')
+
+
+//			let str = 'm1iao234vke789tang456'
+//			let re = /\d/  // 只能找一个
+//			let re1 = /\d/g
+//			let re2 = /\d+/g
+//			console.log(str.match(re))
+//			console.log(str.match(re1))
+//			console.log(str.match(re2))
+
+			//{n}   {n,}   {n,m}
+//			let str = 'asa1sa12sa123sa1234s'
+//			//a和s之间至少出现一次数字  搜索全局
+//			let re1 = /a\d+s/g
+//			console.log(str.match(re1))
+//			//a和s之间至少出现零次数字  搜索全局
+//			let re2 = /a\d*s/g
+//			console.log(str.match(re2))
+//			//a和s之间至少出现零次数字最多一次  搜索全局
+//			let re3 = /a\d?s/g
+//			console.log(str.match(re3))
+//			//a和s之间出现两次  搜索全局
+//			let re4 = /a\d{2}s/g
+//			console.log(str.match(re4))
+//			//a和s之间至少出现两次  搜索全局
+//			let re5 = /a\d{2,}s/g
+//			console.log(str.match(re5))
+//			//a和s之间至少出现两次，最多出现三次  搜索全局
+//			let re6 = /a\d{2,3}s/g
+//			console.log(str.match(re6))
+
+
+//			str.search(string|re);
+//					作用
+//							检索指定字符串或正则表达式匹配到的字符串首次出现的位置
+//						语法
+//							number string.search(string|regexObj)
+//						参数
+//							string|regexObj
+//							字符串或正则表达式
+//
+//						返回值
+//							匹配到的字符串首次出现的位置
+//							没有检索到返回-1
+//
+//				indexOf只能接收字符串作为参数
+
+
+//			let str = 'miao789vke456tang'
+//			console.log( str.search(/\d/) )
+
+			//indexOf  不能接收正则   search可以 
+		</script>
+	</body>
+</html>

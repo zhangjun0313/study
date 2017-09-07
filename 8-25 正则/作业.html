@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="text" id="txt" value=""/>
+		<input type="button" id="btn" value="测试" />
+		<span id="span">请输入邮箱</span>
+		
+		<script>
+			let txt = document.getElementById('txt')
+			let span = document.getElementById('span')
+			//let re1 = /^\w+@\w{2,5}(\.net|\.com|\.cn){1,3}$/g
+			//let re1 = /^\w+@\w{2,5}(\.(net)?|\.com|\.cn){1,3}$/g
+			//let re1 = /^\w+@\w{2,5}((\.net){1}$|(\.com){1}$|(\.cn){1}$){1,3}$/g	
+			let re1 = /^\w+@(\d|[a-z]){2,5}(\.[a-z]{2,3}){1,3}$/g
+			btn.onclick = function(){
+				let str = txt.value
+				if( str.search(re1) !== -1 ){
+					span.innerHTML = ''	
+					console.log(str.match(re1),'正确')
+				}else{
+					span.innerHTML = '输入格式不正确'
+				}
+			}
+			txt.oninput = function(){
+				if( this.value === '' ){
+					span.innerHTML = '请输入邮箱'
+				}
+			}
+		</script>
+	</body>
+</html>

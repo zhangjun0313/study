@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			
+			
+			'use strict'
+			//  1   严格模式下   直接调用函数  this指向undefined   非严格模式   this指向window
+//			function fn(){
+//				console.log(this)
+//			}
+//			fn()
+
+			// 2  严格模式下   改变this指向时   this指向传的第一个参数  非严格模式下   this指向window
+			
+//			function fn( a , b  ){
+//				console.log( a , b , this )
+//			}
+//			fn.call( 1 , 2 , 3 )
+			
+			// 3  严格模式下  重复声明形参 会报错   非严格模式下   a的值是最后一次赋值
+//			function fn( a , a ){
+//				console.log( a , a )
+//			}
+//			fn( 1 )
+			
+			// 4 严格模式下必须用 var let const 声明变量  否则会报错   非严格模式下 如果不用var的话 就会是全局变量
+//			a = 10
+//			console.log(a)
+
+			// 5 严格模式下  arguments不会追踪变化    非严格模式下  arguments会追踪变化
+//			function fn( a ){
+//				a = 10
+//				console.log(arguments)
+//			}
+//			fn( 1 , 2 , 3 , 4 )
+
+			// 6 严格模式下 arguments不能赋值  非严格模式下  arguments  是可以赋值的
+//			function fn(){
+//				arguments = 10
+//				console.log(arguments)
+//			}
+//			fn(1,2,3)
+
+			// 7 严格模式下  用delete删除一个变量会报错   非严格模式下  不能删除但也不会报错
+//			var a = 10
+//			delete a
+
+			// 8 严格模式下  不能在if for等中声明函数  会报错  非严格模式下可以
+//			if( true ){
+//				function fn(){
+//					console.log(111)
+//				}
+//			}
+//			fn()
+		</script>
+	</body>
+</html>

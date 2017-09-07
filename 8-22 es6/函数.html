@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<script>
+			//a和b的默认值为0  如果有参数就按参数来 没有参数就按默认值来
+//			function func( a=0 , b=0 ){
+//				console.log(a)
+//				console.log(b)
+//			}
+//			
+//			func( 1 , 2 )
+			//  没有var n 的话  直接在控制台打出来  会报错
+			//console.log(n)
+			//  如果是window.n  或  typeof n 的话 不会报错  会显示undefined
+			//console.log(window.n)
+			//console.log(typeof n)
+			
+			//可以通过这种方法简单判断一个变量是否声明过   但是得排除 声明了这个变量却没有赋值的情况
+//			if( typeof n === 'undefined' ){
+//				console.log('没声明')
+//			}else{
+//				console.log('声明了')
+//			}
+
+			//如果是用let声明的变量    即使声明了  在声明之前 用typeof  打  也会报错   
+			//let声明的变量之后  就会进入暂时性死区   简称TDZ
+//			console.log(typeof n)
+//			let n = 0
+
+
+//			function fn( a = 0 ){
+//				//let a = 10   如果用let再次声明形参的话会报错  因为let不能重复声明一个变量
+//				//var a = 10  如果用var再次声明形参的话不会报错   但却会重置形参的值
+//				console.log(a)
+//			}
+//			fn(1)
+//			fn()
+
+//			{//简单的推算出函数中的形参是用var声明的
+//				//let a = 10
+//				var a = 10
+//				var a = 100
+//				//let a = 100
+//				console.log(a)
+//			}
+		</script>
+	</body>
+</html>

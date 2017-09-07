@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<ul>
+			<li>111</li>
+			<li>222</li>
+			<li>333</li>
+			<li>444</li>
+			<li>555</li>
+		</ul>
+		<script>
+			//创建数组的两种方法
+//			let arr1 = []
+//			let arr2 = new Array
+			//new Array 方法给数组添加数
+//			arr2[0] = 1
+//			arr2[1] = 2
+			//new Array 方法给数组添加数
+			//let arr3 = new Array('1',2)
+			//  但如果只传一个数字的话 会把这个数字作为这个数组的length处理  而不是下标为0的项
+			//let arr4 = new Array(3)
+			//Array.of()   只传一个参数就把这个参数作为这个数组下标为0的项
+			//let arr5 = Array.of(3)
+//			console.log(arr1)
+//			console.log(arr2)
+//			console.log(arr3)
+//			console.log(arr4)
+//			console.log(arr5)
+
+
+			//Array.from()方法  把数组或类数组转成数组  
+			//第一个参数  是类数组或数组  第二个参数是个函数  第三个参数是this的指向
+//			let lis = document.getElementsByTagName('li')
+//			let a = Array.from(lis,function(item){
+//				return item.innerHTML
+//				//console.log(this)
+//			},document)
+//			console.log(a)
+
+			//find()方法   找到数组中首次满足条件的数  如果没有返回undefined
+//			let arr1 = [1,2,3,4,5,6]
+//			let arr2 = arr1.find(function( item , index , arr ){
+//				return item < 2
+//			})
+//			
+//			console.log(arr2)
+
+
+			//for in      for of
+//			let arr = [1,2,3,4,5,6]
+			//for in 打出来的是数组的下标
+//			for( let attr in arr ){
+//				console.log(attr)
+//			}
+			//for of 打出来的是数组的每一项
+//			for( let node of arr ){
+//				console.log(node)
+//			}
+
+			//indexOf()方法
+			//let arr = [1,2,3,4,NaN]
+			//console.log(arr.indexOf(NaN))//判断不出NaN  返回的是-1
+			//console.log(arr.indexOf(2))//如果有就返回这项所在的下标
+			//includes()方法  如果有返回true   没有返回false
+			//console.log(arr.includes(NaN))//可以判断出NaN  所以返回的是true
+			//console.log(arr.includes(NaN,3))//第二个参数是从哪开始找
+		</script>
+	</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="button" value="改变名字" />
+		<input type="button" value="改变年龄" />
+		<input type="button" value="改变性别" />
+		<ul id="list">
+			<!--<li></li>
+			<li></li>
+			<li></li>-->
+		</ul>
+		<script>
+			let data = {
+				username:'leo',
+				age:30,
+				sex:'男'
+			}
+			
+			let usernameVal = data.username
+			Object.defineProperty( data , 'username' , {
+				get:function(){
+					return usernameVal
+				},
+				set:function( newVal ){
+					console.log(usernameVal,newVal)
+					usernameVal = newVal
+					func()
+				}
+			} )
+			let ageVal = data.age
+			Object.defineProperty( data , 'age' , {
+				get:function(){
+					return ageVal
+				},
+				set:function( newVal ){
+					ageVal = newVal
+					func()
+				}
+			} )
+			let sexVal = data.sex
+			Object.defineProperty( data , 'sex' , {
+				get:function(){
+					return sexVal
+				},
+				set:function( newVal ){
+					sexVal = newVal
+					func()
+				}
+			} )
+			
+			function func(){
+				var html = ''
+				for( let attr in data ){
+					html += `
+							<li>${data[attr]}</li>
+						`
+				}
+				list.innerHTML = html
+			}
+			func()
+			let btns = document.getElementsByTagName('input')
+			btns[0].onclick = function(){
+				data.username = '张珺'
+				//func()
+			}
+			btns[1].onclick = function(){
+				data.age = 23
+				//func()
+			}
+			btns[2].onclick = function(){
+				data.sex = '纯爷们'
+				//func()
+			}
+		</script>
+	</body>
+</html>

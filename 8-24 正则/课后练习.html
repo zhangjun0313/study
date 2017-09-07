@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			//http://deerchao.net/tutorials/regex/regex.htm
+			/*
+				onInput
+
+				在输入的过程中
+					1. 如果没有输入数字，则显示“没有输入数字”
+					2. 有输入数字了，就显示“有输入数字，输入的数字为：468,0,4”
+						输入数字规则：
+							a. 连续输入的数字，要在一起显示
+							b.如果输入的数字为 1,3,5,7 则用*代替
+			*/
+
+			
+		</script>
+	</head>
+
+	<body>
+		<input type="text" id="btn" />
+		<p id="op">没有输入数字</p>
+		<span id="span"></span>
+		<div>
+<pre style="color: red;font-size: 30px;">
+在输入的过程中
+	1. 如果没有输入数字，则显示“没有输入数字”
+	2. 有输入数字了，就显示“输入数字啦,数字为：468,0,4”
+		输入数字规则：
+			a. 连续输入的数字，要在一起显示
+			b.如果输入的数字为 1,3,5,7 则用*代替
+</pre>
+		</div>
+		
+		
+		<script>
+			let btn = document.getElementById('btn')
+			let op = document.getElementById('op')
+			let span = document.getElementById('span')
+			btn.oninput = function(){
+				let re1 = /\d/g
+				let re2 = /\d+/g
+				if( this.value.match(re1) ){
+					let str = this.value.match(re2)
+					op.innerHTML = '输入数字了'
+					span.innerHTML = '数字为'+str
+					let re3 = /[1357]/g
+					let str1 = span.innerHTML + ''
+					let str2 = str1.replace(re3,function($0){
+						return '*'.repeat($0.length)
+					})
+					//console.log(str2)
+					span.innerHTML = '数字为'+str2
+				}else{
+					op.innerHTML = '没有输入数字'
+					span.innerHTML = ''
+				}
+			}
+			
+		</script>
+	</body>
+</html>

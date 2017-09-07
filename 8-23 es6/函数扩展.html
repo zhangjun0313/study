@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="button" value="改变了" />
+		<input type="button" value="改变了" />
+		<input type="button" value="改变了" />
+		<script>
+//			let btns = document.getElementsByTagName('input')
+//			for( let i = 0 ; i < btns.length ; i++ ){
+//				btns[i].onclick = function(){
+//					setTimeout(function(){
+//						this.style.background = 'red'
+//					},1000)
+//				}
+//			}
+			let btns = document.getElementsByTagName('input')
+			for( let i = 0 ; i < btns.length ; i++ ){
+				btns[i].onclick = function(){
+					setTimeout(()=>{
+						this.style.background = 'red'
+					},1000)
+				}
+			}
+		</script>
+	</body>
+</html>
