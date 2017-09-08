@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            div {
+				width: 100px;
+				height: 100px;
+				background:red;
+				position: absolute;
+				left: 0;
+				top: 0;
+			}
+        </style>
+    </head>
+    <body>
+        <div id="box1"></div>
+        <div id="box2"></div>
+        <script>
+            let box1 = document.getElementById('box1')
+            let box2 = document.getElementById('box2')
+            function Tuozhuai( box ){
+                this.box = box;
+            }
+            Tuozhuai.prototype.init = function(){
+                //console.log(this,this.box)
+                this.box.onmousedown = this.downFn.bind(this);
+            }
+            Tuozhuai.prototype.downFn = function( ev ){
+                //console.log(this)
+                this.box.disX = ev.clientX - this.box.offsetLeft;
+                this.box.disY = ev.clientY - this.box.offsetTop;
+                document.onmousemove = this.moveFn.bind(this)
+            }
+            Tuozhuai.prototype.moveFn = function( ev ){
+                //console.log(this)
+                this.box.style.left = ev.clientX - this.box.disX + 'px';
+                this.box.style.top = ev.clientY - this.box.disY + 'px';
+                document.onmouseup = this.upFn.bind(this);
+            }
+            Tuozhuai.prototype.upFn = function(){
+                document.onmousemove = document.onmouseup = null
+            }
+            let t1 = new Tuozhuai( box1 );
+            t1.init();
+            let t2 = new Tuozhuai( box2 );
+            t2.init();
+        </script>
+    </body>
+</html>

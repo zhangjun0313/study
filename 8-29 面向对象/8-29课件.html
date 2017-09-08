@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <script>
+            /*
+                constructor
+				    函数的原型是一个对象，对象初始的时候有一个属性为constructor
+					constructor的值指向的是拥有这个原型的函数
+                    constructor 可以被改写，所以判断一个对象属于哪个类型有问题
+            */
+
+            // function Fn(){
+            //     console.log(this)
+            // }
+            // console.log(Fn.prototype.constructor)
+            // Fn.prototype.constructor = 1
+            // console.log(Fn.prototype.constructor)
+            // let arr1 = []
+            // let arr2 = []
+            // let obj = {}
+            // console.log(arr1.constructor === arr2.constructor)
+            // arr1.constructor = 2
+            // console.log(arr1.constructor === arr2.constructor)
+
+
+            // function Fn(){
+            //     console.log(this)
+            // }
+            // Fn.prototype = {
+            //     constructor : Fn,
+            //     abc1(){
+            //         console.log(111)
+            //     },
+            //     abc2(){
+                    
+            //     }
+            // }
+            // let f = new Fn();
+            // console.log(f.abc1)
+            // console.log(f.constructor)
+
+
+            /*
+                instanceOf
+					二元运算符
+						对象  instanceOf 函数
+
+						描述有问题：
+								简单理解：运算一下这个函数是不是对象的构造函数
+							是 结果为true
+							不是 结果为false
+						正确描述（待定）：
+							运算一下函数的原型是不是在这这个对象的原型链上
+            */
+            // function Fn(){
+                
+            // }
+            // Fn.prototype = {
+            //     constructor:Fn,
+            //     abc(){
+            //         console.log(111)
+            //     }
+            // }
+            // let f = new Fn();
+            // console.log( f instanceof Fn )
+            // console.log( f instanceof Array )
+            // console.log( f instanceof Object )
+
+
+
+            /*
+				
+				判断类型
+					typeof 
+						数组和对象不能分辨出来
+					constructor
+						容易被改写
+					instanceof
+						找原型链上的函数
+                    Object.prototype.toString
+						几乎完美
+
+			*/
+
+            // console.log(typeof []);
+			// console.log(typeof {});
+
+            // console.log([] instanceof Array);
+			// console.log([] instanceof Object);
+
+            // console.log(Object.prototype);
+
+			// alert({}.toString()); // 把对象转成字符串 toString()  [object Object]
+
+			// console.log(Array.prototype);
+			// // 把数组中每一项通过,连接起来，返回的是字符串
+			// alert([].toString());
+            // alert([1,4,2,3,5].toString());
+
+            // alert(Object.prototype.toString.call([]).slice(8,-1) === "Array");// [object Array]
+            // alert(Object.prototype.toString.call([]))
+			// alert(Object.prototype.toString.call(1))
+			// alert(Object.prototype.toString.call('abc'))
+			// alert(Object.prototype.toString.call(new Date()))
+			// alert(Object.prototype.toString.call(Math))
+			// alert({}.toString())
+
+
+
+            /*
+				对象.hasOwnProperty(属性名)
+					判断属性名是不是对象自身的属性
+					并不会找原型链上的
+                for in 遍历一个对象上的属性
+						去找原型链上的属性
+
+			*/
+            /*
+			    Object.getOwnPropertyDescriptor() 方法返回指定对象上一个自有属性对应的属性描述符。
+				    （自有属性指的是直接赋予该对象的属性，不需要从原型链上进行查找的属性）
+			*/
+            // let obj = {
+            //     a:1
+            // }
+            // console.log(obj.hasOwnProperty('a'))
+            // console.log(obj.hasOwnProperty('c'))
+
+            // function Fn(){
+            //     a : 1
+            // }
+            // Fn.prototype.aaa = 111
+            // let f = new Fn();
+            // f.aa = 11
+            // console.log(f.hasOwnProperty('aaa'))
+            // console.log(f.hasOwnProperty('a'))
+            // console.log(f.hasOwnProperty('aa'))
+
+
+            // Object.prototype.miaov = 'ketang';
+			// let obj  = {
+			// 	a:1
+			// }
+			// console.log(obj);
+			// // 1. 并没有把__proto__遍历出来
+			// for( var attr in obj){
+			// 	if(obj.hasOwnProperty(attr)){
+			// 		console.log(attr);
+			// 	}
+			// }
+            // for( var attr in obj){
+			// 		console.log(attr);
+			// }
+
+            let obj = {
+                a : 1
+            }
+            obj.b = 2
+            function Fn(){
+
+            }
+            let f = new Fn();
+            console.log(obj)
+            console.log(Object.getOwnPropertyDescriptor(obj,"a"));
+            console.log(Object.getOwnPropertyDescriptor(obj,"__proto__"));
+            console.log(Object.getOwnPropertyDescriptor(Fn.prototype,"constructor"));
+        </script>
+    </body>
+</html>

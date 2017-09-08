@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <input type="button" name="" id="btn" value="生产">
+        <script>
+
+            class Newdiv{
+                constructor( gaidong ){
+                    this.moren = {
+                        width:100,
+                        height:100,
+                        background:'red'
+                    }
+                    Object.assign( this.moren , gaidong )
+                    this.init()
+                }
+                init(){
+                    this.div = this.shengcheng()
+                    this.divscc()
+                    document.body.appendChild( this.div )
+                }
+                shengcheng(){
+                    let div = document.createElement('div')
+                    return div
+                }
+                divscc(){
+                    this.div.style.cssText = `
+                        width:${ this.moren.width }px;
+                        height:${ this.moren.height }px;
+                        background:${ this.moren.background };
+                        position: absolute;
+					    left: 50px;
+					    top: 50px;
+                        `
+                }
+            }
+
+
+            let btn = document.getElementById('btn');
+
+            btn.onclick = function(){
+                new Newdiv( {
+                    height:300,
+                    width:300
+                } )
+            }
+        </script>
+    </body>
+</html>

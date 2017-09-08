@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <script>
+            /*
+                面向对象
+                    约定：构造函数首字母大写；
+
+
+                    new 操作符
+                        调用函数  创建对象
+
+                        步骤：
+                            1.在构造函数内部创建一个空对象
+                            2.函数内部的this指向这个空对象（this就代表了这个对象）
+                            3.执行函数，添加属性
+                            4.返回这个对象
+                        如果return后面的值是一个简单的值  返回的还是这个对象  如果return后面的值是一个对象 那么返回的是ruturn后面的对象
+
+                    把同一类对象共享的属性和方法都放在原型上   
+                    prototype  原型
+                        每一个函数都拥有一个属性叫prototype，就是原型
+					    通过这个函数创建出来的一类对象拥有的共享的属性和方法，都放在放在这个函数的原型上
+					    原型对应的值是一个对象（默认是通过Object创建出来的）
+                    __proto__
+					    每一个对象上都有办一个__proto__属性，值指向的是创建这个对象的构造函数的原型
+
+                    原型链
+                        一个对象查找一个属性的一套规则
+                        当查找一个属性，先从自身查找，继续找构造函数的原型，
+                        直到找到Object.prototype为止，没找到返回undefined
+            */
+
+            // function Fn(){
+            //     this.a = 10
+            // }
+            // let i = new Fn();
+            // console.log(i.a)
+
+            // function Fn(){
+            //     this.a = 10
+            //     return {a:1}
+            // }
+            // let i = new Fn();
+            // console.log(i.a)
+
+            // fun
+            //如果直接调用  那么this指向是 window
+            // function Fn(){
+            //     this.a = 10
+            // }
+            // Fn.prototype.s = 100
+            // Fn.prototype.c = function(){
+            //     console.log(111)
+            // }
+            // let i = new Fn();
+            // console.log(i.s)
+            // i.c()
+
+
+            // Object.prototype.abc = 123;
+            // function Fn(){
+
+            // }
+            // //Fn.prototype.abc = 111
+            // let f = new Fn();
+            // console.log(f.abc)
+        </script>
+    </body>
+</html>

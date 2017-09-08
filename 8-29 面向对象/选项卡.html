@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            #box1 div,#box2 div{
+                width: 300px;
+                height: 300px;
+                border: 1px solid #000;
+                font-size: 30px;
+                text-align: center;
+                display: none;
+            }
+            .yellow{
+                background: yellowgreen;
+            }
+        </style>
+    </head>
+    <body>
+        <input type="button" id="btn1" value="让第一个自动播放" />
+		<input type="button" id="btn2" value="停止第二个自动播放" />
+		<input type="button" id="btn3" value="停止的运动，运动的停止" />
+        <div id="box1">
+            <input type="button" class="yellow" value="按钮1">
+            <input type="button" value="按钮2">
+            <input type="button" value="按钮3">
+            <input type="button" value="按钮4">
+            <input type="button" value="按钮5">
+            <div style="display:block;">按钮1</div>
+            <div>按钮2</div>
+            <div>按钮3</div>
+            <div>按钮4</div>
+            <div>按钮5</div>
+        </div>
+        <div id="box2">
+            <input type="button" class="yellow" value="按钮1">
+            <input type="button" value="按钮2">
+            <input type="button" value="按钮3">
+            <input type="button" value="按钮4">
+            <input type="button" value="按钮5">
+            <div style="display:block;">按钮1</div>
+            <div>按钮2</div>
+            <div>按钮3</div>
+            <div>按钮4</div>
+            <div>按钮5</div>
+        </div>
+
+        <script>
+            let box1 = document.getElementById('box1');
+            let box2 = document.getElementById('box2');
+            let btn1 = document.getElementById('btn1');
+            let btn2 = document.getElementById('btn2');
+            let btn3 = document.getElementById('btn3');
+
+
+            function Fn( box ){
+                this.inputs = box.getElementsByTagName('input');
+                this.divs = box.getElementsByTagName('div');
+                this.timer = null;
+                this.n = 0;
+                //console.log(this.inputs)
+            }
+            Fn.prototype.dianji = function(){
+                //console.log(this.inputs)
+                let thas = this
+                for( var i = 0 ; i < this.inputs.length ; i++ ){
+                    this.inputs[i].index = i
+                    this.inputs[i].onclick = function(){
+                        //console.log( thas.inputs )
+                        for( var i = 0 ; i < thas.inputs.length ; i++ ){
+                            thas.inputs[i].className = '';
+                            thas.divs[i].style.display = 'none';
+                        }
+                        this.className = 'yellow'
+                        thas.divs[this.index].style.display = 'block'
+                    }
+                }
+            }
+            Fn.prototype.autoPlay = function(){
+                //console.log(this.inputs)
+                if( this.timer ){
+                    return
+                }
+                this.timer = setInterval(()=>{
+                    this.n++
+                    if( this.n > this.inputs.length - 1 ){
+                        this.n = 0
+                    }
+                    for( var i = 0 ; i < this.inputs.length ; i++ ){
+                        this.inputs[i].className = '';
+                        this.divs[i].style.display = 'none';
+                    }
+                    this.inputs[this.n].className = 'yellow';
+                    this.divs[this.n].style.display = 'block'
+                },1000)
+            }
+            Fn.prototype.stopPlay = function(){
+                clearInterval(this.timer);
+                this.timer = null;
+            }
+            Fn.prototype.zhuangtai = function(){
+                return !!this.timer
+            }
+            let t1 = new Fn( box1 );
+            t1.dianji();
+            btn1.onclick = function(){
+                t1.autoPlay();
+            }
+            let t2 = new Fn( box2 );
+            t2.dianji();
+            t2.autoPlay();
+            btn2.onclick = function(){
+                t2.stopPlay();
+            }
+            btn3.onclick = function(){
+                if( t1.zhuangtai() ){
+                    console.log(111)
+                    t1.stopPlay();
+                }else{
+                    console.log(222)
+                    t1.autoPlay();
+                }
+                if( t2.zhuangtai() ){
+                    console.log(333)
+                    t2.stopPlay();
+                }else{
+                    console.log(444)
+                    t2.autoPlay();
+                }
+            }
+        </script>
+    </body>
+</html>

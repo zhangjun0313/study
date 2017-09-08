@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script>
+            class Tuozhuai{
+                constructor(){
+                    this.downFn = this.downFn.bind( this );
+                    this.moveFn = this.moveFn.bind( this );
+                    this.upFn = this.upFn.bind( this );
+                }
+                tuozhuaiinit( box ){
+                    this.box = box;
+                    this.box.onmousedown = this.downFn;
+                }
+                downFn( ev ){
+                    this.disX = ev.clientX - this.box.offsetLeft;
+                    this.disY = ev.clientY - this.box.offsetTop;
+                    document.onmousemove = this.moveFn;
+                    document.onmouseup = this.upFn;
+                }
+                moveFn( ev ){
+                    this.box.style.left = ev.clientX - this.disX + 'px';
+                    this.box.style.top = ev.clientY - this.disY + 'px';
+                }
+                upFn(){
+                    document.onmousemove = document.onmouseup = null
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <input type="button" name="" value="生成div" id="btn">
+
+        <script>
+            class Newdiv extends Tuozhuai{
+                constructor( gaidong ){
+                    super();
+                    this.moren = {
+                        width:100,
+                        height:100,
+                        background:'red'
+                    }
+                    Object.assign( this.moren , gaidong )
+                    this.init()
+                }
+                init(){
+                    this.div = this.shengcheng()
+                    this.divscc()
+                    document.body.appendChild( this.div )
+                    this.tuozhuaiinit( this.div )
+                }
+                shengcheng(){
+                    let div = document.createElement('div')
+                    return div
+                }
+                divscc(){
+                    this.div.style.cssText = `
+                        width:${ this.moren.width }px;
+                        height:${ this.moren.height }px;
+                        background:${ this.moren.background };
+                        position: absolute;
+					    left: 50px;
+					    top: 50px;
+                        `
+                }
+            }
+            btn.onclick = function(){
+                new Newdiv( {
+                    height:300,
+                    width:300
+                } )
+            }
+        </script>
+    </body>
+</html>

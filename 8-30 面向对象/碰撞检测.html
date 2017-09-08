@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script>
+            
+        </script>
+        <style>
+            div{
+                width: 100px;
+                height: 100px;
+                background: yellowgreen;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+            #div1{
+                z-index: 999;
+            }
+            #div2{
+                top: 500px;
+                left: 500px;
+                background: red;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="div1"></div>
+        <div id="div2"></div>
+
+        <script>
+            let div1 = document.getElementById('div1');
+            let div2 = document.getElementById('div2');
+            class Pengzhuang{
+                init( a , b ){
+                    this.a = a;
+                    this.b = b;
+                    this.jiance()
+                }
+                jiance(){
+                    console.log(this.a,this.b)
+                    this.obj1Rect = this.a.getBoundingClientRect();
+                    this.obj2Rect = this.b.getBoundingClientRect();
+                    if(this.obj1Rect.right < this.obj2Rect.left || this.obj1Rect.bottom < this.obj2Rect.top || this.obj1Rect.left > this.obj2Rect.right || this.obj1Rect.top > this.obj2Rect.bottom){
+                        return false;
+                    }else{
+                        return true;
+                    }
+                }
+            }
+            class Tuozhuai extends Pengzhuang{
+                constructor(){
+                    super();
+                    this.downFn = this.downFn.bind( this );
+                    this.moveFn = this.moveFn.bind( this );
+                    this.upFn = this.upFn.bind( this );
+                }
+                tuozhuaiinit( box ){
+                    this.box = box;
+                    this.box.onmousedown = this.downFn;
+                }
+                downFn( ev ){
+                    this.disX = ev.clientX - this.box.offsetLeft;
+                    this.disY = ev.clientY - this.box.offsetTop;
+                    document.onmousemove = this.moveFn;
+                    document.onmouseup = this.upFn;
+                }
+                moveFn( ev ){
+                    this.box.style.left = ev.clientX - this.disX + 'px';
+                    this.box.style.top = ev.clientY - this.disY + 'px';
+                    this.jian = new Pengzhuang()
+                    this.jian.init( div1 , div2 )
+                }
+                upFn(){
+                    document.onmousemove = document.onmouseup = null
+                }
+
+            }
+            
+
+
+            let t1 = new Tuozhuai();
+            t1.tuozhuaiinit(div1)
+            console.log( t1.jiance( div1 , div2 ) )
+            // if( t1.jiance( div1 , div2 ) ){
+            //     console.log(111)
+            // }else{
+            //     console.log(222)
+            // }
+            // let p = new Pengzhuang();
+            // p.init( div1 , div2 );
+            // if( p.init( div1 , div2 ) ){
+            //     console.log(111)
+            // }else{
+            //     console.log(222)
+            // }
+
+
+
+            // function collision(obj1,obj2){
+            //     var obj1Rect = obj1.getBoundingClientRect();	
+            //     var obj2Rect = obj2.getBoundingClientRect();	
+
+            //     if(obj1Rect.right < obj2Rect.left || obj1Rect.bottom < obj2Rect.top || obj1Rect.left > obj2Rect.right || obj1Rect.top > obj2Rect.bottom){
+            //         return false;
+            //     }else{
+            //         return true;
+            //     }
+            // }
+        </script>
+    </body>
+</html>
