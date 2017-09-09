@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <script>
+            class Func{
+                constructor(){
+                    this.fabuzhe = [];
+                }
+                dingyue( fn ){
+                    this.fabuzhe.push(fn)
+                }
+                fabu(){
+                    for( let i = 0 ; i < this.fabuzhe.length ; i++ ){
+                        this.fabuzhe[i]();
+                    }
+                }
+                quxiao( fn ){
+                    for( let i = 0 ; i < this.fabuzhe.length ; i++ ){
+                        if( fn === this.fabuzhe[i] ){
+                            this.fabuzhe.splice( i , 1 )
+                            break
+                        }
+                    }
+                }
+            }
+
+
+            function fn(){
+                console.log('你要买房');
+            }
+
+            let f = new Func();
+            f.dingyue( function(){
+                console.log('我要买房');
+            } )
+            f.dingyue( function(){
+                console.log('他要买房');
+            } )
+            f.dingyue( fn )
+
+            f.quxiao( fn )
+
+
+            document.onclick = function(){
+
+                f.fabu();
+            }
+        </script>
+    </body>
+</html>

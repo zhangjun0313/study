@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script>
+            class Func{
+                constructor(){
+                    this.fabuzhe = {};
+                }
+                dingyue( key , fn ){
+                    if( !this.fabuzhe[key] ){
+                        this.fabuzhe[key] = []
+                    }
+                    this.fabuzhe[key].push( fn )
+                }
+                fabu( fabuName ){
+                    let arr = this.fabuzhe[fabuName]
+                    if( arr ){
+                        for (var i = 0; i < arr.length; i++) {
+                            arr[i]();
+                        }
+                    }
+                }
+                quxiao( quxiaoName , fn ){
+                    let arr = this.fabuzhe[quxiaoName];
+                    if( arr ){
+                        for (var i = 0; i < arr.length; i++) {
+                            if( fn === arr[i] ){
+                                arr.splice( i , 1 )
+                            }
+                        }
+                    }
+                }
+            }
+            class Tuozhuai extends Func {
+                constructor( box ){
+                    super();
+                    this.box = box;
+                }
+                tuozhuaiinit(){
+                    this.box.onmousedown = this.downFn.bind( this );
+                }
+                downFn( ev ){
+                    this.fabu( 'anxia' )
+                    this.disX = ev.clientX - this.box.offsetLeft;
+                    this.disY = ev.clientY - this.box.offsetTop;
+                    document.onmousemove = this.moveFn.bind( this );
+                    document.onmouseup = this.upFn.bind( this );
+                }
+                moveFn( ev ){
+                    this.fabu( 'huadong' )
+                    this.left = ev.clientX - this.disX;
+                    this.top = ev.clientY - this.disY;
+                    
+                    this.box.style.left = this.left + 'px';
+                    this.box.style.top = this.top + 'px';
+                }
+                upFn(){
+                    this.fabu( 'taiqi' )
+                    document.onmousemove = document.onmouseup = null;
+                }
+            }
+        </script>
+        <style>
+            #box1 {
+				width: 100px;
+				height: 100px;
+				background: red;
+				position: absolute;
+				top: 0;
+				left: 300px;
+			}
+        </style>
+    </head>
+    <body>
+        <div id="box1"></div>
+
+        <script>
+
+            
+
+
+            let box1 = document.getElementById('box1');
+            let b1 = new Tuozhuai( box1 );
+            b1.tuozhuaiinit();
+            b1.dingyue( 'anxia' , function(){
+                console.log( '我按下鼠标了' );
+            } )
+            b1.dingyue( 'huadong' , function(){
+                console.log( '鼠标正在移动' );
+            } )
+            b1.dingyue( 'taiqi' , function(){
+                console.log( '鼠标抬起了' );
+            } )
+        </script>
+    </body>
+</html>

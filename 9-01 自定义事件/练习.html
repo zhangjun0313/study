@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script>
+            class Tuozhuai{
+                constructor( box ){
+                    this.box = box;
+                }
+                tuozhuaiinit(){
+                    this.box.onmousedown = this.downFn.bind( this );
+                }
+                downFn( ev ){
+                    this.disX = ev.clientX - this.box.offsetLeft;
+                    this.disY = ev.clientY - this.box.offsetTop;
+                    document.onmousemove = this.moveFn.bind( this );
+                    document.onmouseup = this.upFn.bind( this );
+                }
+                moveFn( ev ){
+                    this.left = ev.clientX - this.disX;
+                    this.top = ev.clientY - this.disY;
+
+                    this.box.style.left = this.left + 'px';
+                    this.box.style.top = this.top + 'px';
+                }
+                upFn(){
+                    document.onmousemove = document.onmouseup = null;
+                }
+            }
+        </script>
+        <style>
+            #box1 {
+				width: 100px;
+				height: 100px;
+				background: red;
+				position: absolute;
+				top: 0;
+				left: 300px;
+			}
+        </style>
+    </head>
+    <body>
+        <div id="box1"></div>
+
+        <script>
+
+            class Xianzhi extends Tuozhuai {
+                constructor( box ){
+                    super( box );
+                    
+                    this.width = 100
+                    this.height = 100
+                }
+                moveFn( ev ){
+                    this.left = ev.clientX - this.disX;
+                    this.top = ev.clientY - this.disY;
+                    if( this.left < 0 ){
+                        this.left = 0
+                    }
+                    if( this.top < 0 ){
+                        this.top = 0
+                    }
+                    let maxW = window.innerWidth - this.width
+                    if( this.left > maxW ){
+                        this.left = maxW
+                    }
+                    let maxH = window.innerHeight - this.height
+                    if( this.top > maxH ){
+                        this.top = maxH
+                    }
+
+                    this.box.style.left = this.left + 'px';
+                    this.box.style.top = this.top + 'px';
+                }
+            }
+
+
+            let box1 = document.getElementById('box1');
+            let b1 = new Xianzhi( box1 );
+            b1.tuozhuaiinit();
+        </script>
+    </body>
+</html>

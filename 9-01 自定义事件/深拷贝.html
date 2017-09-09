@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <script>
+            let obj1 = {
+                a:'miaov',
+                list:{
+                    b:'ketang',
+                    d:[1,2,3,5,{
+                        q:456
+                    }]
+                }
+            }
+
+            // let obj2 = {};
+            // for( let attr in obj1 ){
+            //     obj2[attr] = obj1[attr]
+            // }
+
+
+            // obj2.list.c = '小任'
+            // console.log( obj1 )
+            // console.log( obj2 )
+
+            // let obj1 = {
+            //     a:'miaov',
+            //     list:{
+            //         b:'ketang'
+            //     }
+            // }
+
+            // let obj2 = {};
+            // for( let attr in obj1 ){
+            //     if( typeof obj1[attr] === 'object' ){
+            //         let obj3 = {};
+            //         for( let attr2 in obj1[attr] ){
+            //             obj3[attr2] = obj1[attr][attr2]
+            //         }
+            //         obj2[attr] = obj3
+            //     }else{
+            //         obj2[attr] = obj1[attr]
+            //     } 
+            // }
+
+
+            // obj2.list.c = '小任'
+            // console.log( obj1 )
+            // console.log( obj2 )
+
+            
+
+            function Func( obj ){
+                let obj2 = obj instanceof Array ? [] : {};
+                for( let attr in obj ){
+                    if( typeof obj[attr] === 'object' && obj[attr] !== null ){
+                        console.log(111)
+                         obj2[attr] = Func( obj[attr] )
+                    }else{
+                        obj2[attr] = obj[attr]
+                    }
+                }
+                return obj2
+            }
+            Func( obj1 )
+            let newObj = Func( obj1 )
+            newObj.list.c = '小任'
+            newObj.list.d.push(1000000000)
+            console.log( obj1 )
+            console.log( newObj )
+        </script>
+    </body>
+</html>
