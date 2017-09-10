@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>todos</title>
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+
+<body>
+    <section class="todoapp">
+        <div>
+            <header class="header" >
+                <h1>todos</h1>
+                <input class="new-todo" placeholder="请输入内容" value="">
+            </header>
+            <section class="main">
+                <input class="toggle-all" type="checkbox"><!-- checked=""-->
+                <ul class="todo-list">
+                    <!-- <li class="completed">
+                        <div class="view">
+                            <input class="toggle" type="checkbox" checked="">
+                            <label>多多对对对</label>
+                            <button class="destroy"></button>
+                        </div>
+                        <input class="edit" value="多多对对对">
+                    </li> -->
+                </ul>
+            </section>
+            <footer class="footer">
+	            <span class="todo-count">
+	            	<strong class="num">0</strong>
+	            	<span>条未选中</span>
+	            </span>
+            </footer>
+        </div>
+    </section>
+
+    <script>
+        let txt = document.getElementsByClassName('new-todo')[0];
+        let list = document.getElementsByClassName('todo-list')[0];
+        let toggleAll = document.getElementsByClassName('toggle-all')[0];
+        let num = document.getElementsByClassName('num')[0];
+        
+        
+        let data = localStorage.getItem( 'shuju' );
+        let arr = [];
+        if( data ){
+            arr = JSON.parse( data );
+
+            var n = arr.length
+            let html = arr.map( function( item , index ){
+                return `
+                    <li data-id="${index}">
+                        <div class="view">
+                            <input class="toggle" type="checkbox">
+                            <label>${ item.title }</label>
+                            <button class="destroy"></button>
+                        </div>
+                        <input class="edit" value="${ item.title }">
+                    </li>
+                `
+            } )
+            list.innerHTML = html.join('')
+            var lis = document.getElementsByTagName('li')
+            for( var i = 0 ; i < arr.length ; i++ ){
+                if( arr[i].isSelected === true ){
+                    lis[i].classList.add('completed')
+                    var inputs = lis[i].getElementsByClassName('toggle')[0]
+                    inputs.checked = true;
+                    n--
+                }
+            }
+            num.innerHTML = n;
+            if( n === 0 ){
+                toggleAll.checked = true;
+                toggleAll.style.color = '#000'
+            }else{
+                toggleAll.checked = false;
+                toggleAll.style.color = 'red'
+            }
+        }
+        if( arr.length === 0 ){
+
+            toggleAll.style.display = 'none'
+            var n = 0
+        }
+        
+
+        document.onkeydown = function( ev ){
+            if( ev.keyCode === 13 ){
+                if( txt.value === '' ){
+                    return;
+                }
+                arr.push( {
+                    title : txt.value,
+                    isSelected:false
+                } )
+                localStorage.setItem('shuju',JSON.stringify(arr))
+                let html = arr.map( function( item , index ){
+                    return `
+                        <li data-id="${index}">
+                            <div class="view">
+                                <input class="toggle" type="checkbox" >
+                                <label>${item.title}</label>
+                                <button class="destroy"></button>
+                            </div>
+                            <input class="edit" value="${item.title}">
+                        </li>
+                    `
+                } )
+                list.innerHTML = html.join('');
+                txt.value = '';
+                n++
+                toggleAll.style.display = 'block'
+                num.innerHTML = n;
+                var lis = document.getElementsByTagName('li')
+                for( var i = 0 ; i < arr.length ; i++ ){
+                    if( arr[i].isSelected === true ){
+                        lis[i].classList.add('completed')
+                        var inputs = lis[i].getElementsByClassName('toggle')[0]
+                        inputs.checked = true;
+                    }
+                }
+                if( n === 0 ){
+                    toggleAll.checked = true;
+                    toggleAll.style.color = '#000'
+                }else{
+                    toggleAll.checked = false;
+                    toggleAll.style.color = 'red'
+                }
+            }
+        }
+
+        list.onclick = function( ev ){
+            if( ev.target.className === 'toggle' ){
+                if( ev.target.checked ){
+                    n--
+                    ev.target.parentNode.parentNode.classList.add('completed');
+                    ev.target.checked = true;
+                    for( var i = 0 ; i < arr.length ; i++ ){
+                        if( ev.target.parentNode.parentNode.dataset.id == i ){
+                            arr[i].isSelected = true
+                        }
+                    }
+                    localStorage.setItem('shuju',JSON.stringify(arr))
+                }else{
+                    n++
+                    ev.target.parentNode.parentNode.classList.remove('completed');
+                    ev.target.checked = false;
+                    for( var i = 0 ; i < arr.length ; i++ ){
+                        if( ev.target.parentNode.parentNode.dataset.id == i ){
+                            arr[i].isSelected = false
+                        }
+                    }
+                    localStorage.setItem('shuju',JSON.stringify(arr))
+                }
+                num.innerHTML = n;
+                if( n === 0 ){
+                    toggleAll.checked = true;
+                    toggleAll.style.color = '#000'
+                }else{
+                    toggleAll.checked = false;
+                    toggleAll.style.color = 'red'
+                }
+            }
+            if( ev.target.className === 'destroy' ){
+                
+                //ev.target.parentNode.parentNode.remove();
+                for( var i = 0 ; i < arr.length ; i++ ){
+                    if( ev.target.parentNode.parentNode.dataset.id == i ){
+                        console.log( arr[i].isSelected )
+                        if( !arr[i].isSelected ){
+                            n--
+                        }
+                        arr.splice( i , 1 )
+                    }
+                }
+                num.innerHTML = n;
+                if( n === 0 ){
+                    toggleAll.checked = true;
+                    toggleAll.style.color = '#000'
+                }else{
+                    toggleAll.checked = false;
+                    toggleAll.style.color = 'red'
+                }
+                let html = arr.map( function( item , index ){
+                    return `
+                        <li data-id="${index}">
+                            <div class="view">
+                                <input class="toggle" type="checkbox" >
+                                <label>${item.title}</label>
+                                <button class="destroy"></button>
+                            </div>
+                            <input class="edit" value="${item.title}">
+                        </li>
+                    `
+                } )
+                list.innerHTML = html.join('');
+                localStorage.setItem('shuju',JSON.stringify(arr))
+                if( arr.length === 0 ){
+                    toggleAll.style.display = 'none'
+                }
+                var lis = document.getElementsByTagName('li')
+                for( var i = 0 ; i < arr.length ; i++ ){
+                    if( arr[i].isSelected === true ){
+                        lis[i].classList.add('completed')
+                        var inputs = lis[i].getElementsByClassName('toggle')[0]
+                        inputs.checked = true;
+                    }
+                }
+                
+            }
+        }
+
+
+
+        toggleAll.onclick = function(){
+            let lis = document.getElementsByTagName('li');
+            let inputs = list.getElementsByClassName('toggle')
+            if( this.checked ){
+                for( var i = 0 ; i < lis.length ; i++ ){
+                    lis[i].classList.add('completed')
+                    inputs[i].checked = true
+                    arr[i].isSelected = true
+                }
+                localStorage.setItem('shuju',JSON.stringify(arr))
+                n = 0
+                num.innerHTML = n
+                this.checked = true
+            }else{
+                for( var i = 0 ; i < lis.length ; i++ ){
+                    lis[i].classList.remove('completed')
+                    inputs[i].checked = false
+                    arr[i].isSelected = false
+                }
+                localStorage.setItem('shuju',JSON.stringify(arr))
+                this.checked = false
+            }
+        }
+
+
+        list.ondblclick = function( ev ){
+            if( ev.target.nodeName === 'LABEL' ){
+                ev.target.parentNode.style.display = 'none'
+                ev.target.parentNode.nextElementSibling.style.display = 'block'
+                ev.target.parentNode.nextElementSibling.focus();
+                document.onkeydown = function( ev ){
+                    if( ev.keyCode === 13 ){
+                        for( var i = 0 ; i < arr.length ; i++ ){
+                            if( ev.target.parentNode.dataset.id == i ){
+                                let val = ev.target.value;
+                                arr[i].title = val
+                                ev.target.style.display = 'none';
+                                ev.target.previousElementSibling.style.display = 'block'
+                                let label = ev.target.previousElementSibling.getElementsByTagName('label')[0]
+                                label.innerHTML = val
+                            }
+                        }
+                        localStorage.setItem('shuju',JSON.stringify(arr))
+                    }
+                    if( ev.keyCode === 27 ){
+                        let label = ev.target.previousElementSibling.getElementsByTagName('label')[0]
+                        let val = label.innerHTML;
+                        console.log( val )
+                        ev.target.style.display = 'none';
+                        ev.target.previousElementSibling.style.display = 'block';
+                        ev.target.value = val;
+                    }
+                }
+            }
+        }
+
+
+        
+
+        //   esc  27
+    </script>
+</body>
+
+</html>
