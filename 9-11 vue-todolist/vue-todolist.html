@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="css/base.css">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+    </head>
+    <body>
+        <section class="todoapp">
+            <div>
+                <header class="header" >
+                    <h1>todos</h1>
+                    <input class="new-todo" @keydown.13="add" placeholder="请输入内容" v-model="todo">
+                </header>
+                <section class="main" v-show="list.length">
+                    <input class="toggle-all" type="checkbox" v-model="panduan"/>
+                    <ul class="todo-list">
+                        <li v-for="item,index in list" :class="{completed :item.selected,editing:edit === item}">
+                            <div class="view">
+                                <input class="toggle" type="checkbox" v-model="item.selected">
+                                <label @dblclick="dbl(item)">{{item.title}}</label>
+                                <button class="destroy" @click="deletetodo(index)"></button>
+                            </div>
+                            <input class="edit" v-model="item.title" @blur="blurFn(item)" @keydown.13="blurFn(item)" @keydown.27="escFn(item)">
+                        </li>
+                    </ul>
+                </section>
+                <footer class="footer">
+                    <span class="todo-count">
+                        <strong class="num" >{{shengyunum}}</strong>
+                        <span>条未选中</span>
+                    </span>
+                </footer>
+            </div>
+        </section>
+        <script src="vue.js"></script>
+        <script>
+            // let data = [
+            //     {
+            //         title:'天气好',
+            //         selected:false
+            //     },
+            //     {
+            //         title:'好天气',
+            //         selected:false
+            //     }
+            // ]
+            let data = localStorage.getItem("miaov-6.17")
+            if( data ){
+                data = JSON.parse(data);
+            }else{
+                data = []
+            }
+            
+            new Vue( {
+                el:'.todoapp',
+                data:{
+                    list:data,
+                    todo:'',
+                    edit:'',
+                    val:''
+                },
+                watch:{
+                    list:{
+                        deep:true,
+                        handler(){
+                            localStorage.setItem("miaov-6.17",JSON.stringify(this.list));
+                        }
+                    }
+                },
+                computed:{
+                    xuanzhongde(){
+                        return this.list.filter( function(item){
+                            return item.selected
+                        } )
+                    },
+                    panduan:{
+                        get(){
+                            return this.xuanzhongde.length === this.list.length
+                        },
+                        set( newVal ){
+                            this.list.forEach(function(item) {
+                                item.selected = newVal
+                            })
+                        }
+                    },
+                    shengyunum(){
+                            return this.list.length - this.xuanzhongde.length
+                        }
+                },
+                methods:{
+                    add(ev){
+                        
+                        this.list.push( {
+                            title:this.todo,
+                            selected:false
+                        } )
+                        this.todo = ''
+                    },
+                    deletetodo(index){
+                        this.list.splice(index,1)
+                    },
+                    dbl(item){
+                        this.edit = item
+                        this.val = item.title
+                    },
+                    blurFn(item){
+                        if( item.title === '' ){
+                            
+                            let i = this.list.indexOf(item)
+                            if( i === -1 ){
+                                return
+                            }
+                            this.list.splice( i , 1 )
+                        }
+                        this.edit = ''
+                    },
+                    escFn(item){
+                        item.title = this.val
+                        this.val = ''
+                        this.edit = ''
+                    }
+                }
+            } )
+        </script>
+    </body>
+</html>
