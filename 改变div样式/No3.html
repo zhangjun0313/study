@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="text" id="txt" value="111111" />
+		<input type="button" id="btn" value="按钮" />
+		<script>
+			var txt = document.getElementById('txt');
+			var btn = document.getElementById('btn');
+			btn.onclick = function (){
+				txt.value = 'hello';
+				console.log(txt.value)
+			}
+		</script>
+	</body>
+</html>
