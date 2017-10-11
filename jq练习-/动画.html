@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            div{
+                width: 200px;
+                height: 200px;
+                background: red;
+                position: absolute;
+                top: 100px;
+                left: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <input type="button" name="" value="运动" class="btn">
+        <input type="button" name="" value="停止" class="stop">
+        <div class="div1"></div>
+
+        <script src="./jquery-3.2.0.js"></script>
+        <script>
+            $(".btn").click(function(){
+                $('.div1').delay(1000)
+                    .animate({
+                        left:1000
+                    },2000)
+                    .animate({
+                        width:1000
+                    },1000)
+                    .animate({
+                        opacity:0
+                    },3000)
+            })
+            $('.stop').click(function(){
+                $('.div1').stop(true)
+            })
+        </script>
+    </body>
+</html>

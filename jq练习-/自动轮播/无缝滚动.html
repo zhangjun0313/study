@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		<link rel="stylesheet" type="text/css" href="slide.css" />
+		<style type="text/css">
+			body{
+				background-color: #ffd800;
+			}
+			.nav .blue {
+				background-color: blue;
+			}
+		</style>
+		<script>
+			/*
+				当给一个元素添加样式，如没有起作用，第一反应
+
+					检查元素
+			*/
+		</script>
+		<script src="../jquery-3.2.0.js"></script>
+	</head>
+
+	<body>
+		<div class="slide">
+			<div  class="tagClient">
+				<ul class="list">
+					<li><img src="./ads/1.png" /></li> 
+					<li><img src="./ads/2.png" /></li>
+				</ul>
+			</div>
+			<div class="prev"></div>
+			<div class="next"></div>
+			<div class="nav">
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+		</div>
+		<script>
+			let arrImg = ['./ads/1.png','./ads/2.png','./ads/3.png','./ads/4.png','./ads/5.png']
+			let n = 0
+			$('.nav span').eq(0).addClass('blue')
+			let t = setInterval(auto,1000)
+			$('.next').mouseover(function(){
+				clearInterval(t)
+			})
+			$('.next').mouseout(function(){
+				t = setInterval(auto,1000)
+			})
+			$('.next').click( function(){
+				auto()
+			} )
+			$('.prev').mouseover(function(){
+				clearInterval(t)
+			})
+			$('.prev').mouseout(function(){
+				t = setInterval(auto,1000)
+			})
+			$('.nav').on('mouseover','span',function(){
+				clearInterval(t)
+			})
+			$('.nav').on('mouseout','span',function(){
+				t = setInterval(auto,1000)
+			})
+			$('.prev').click( function(){
+				if( $('.list').is(':animated') ){
+					return
+				}
+				n--
+				if( n < 0 ){
+					n = arrImg.length - 1
+				}
+				$('.list').css('left',-$('.list li').eq(0).width())
+				$('.list li img')[1].src = $('.list li img')[0].src
+				$('.list li img')[0].src = arrImg[n]
+				
+				$('.list').stop().animate( {
+					left : 0
+				} , 300 )
+				$('.nav span').removeClass('blue')
+				$('.nav span').eq(n).addClass('blue')
+			} )
+			$('.nav').on('mouseover','span',function(){
+				let m = $(this).index()
+				console.log(m)
+				$('.nav span').removeClass('blue')
+				$(this).addClass('blue')
+				console.log(m,n)
+				//n = $(this).index()
+				if( m === n ){
+					return
+				}
+				if( m > n ){
+					$('.list li img')[1].src = arrImg[m]
+					$('.list').stop().animate( {
+						left : -$('.list li:eq(0)').width()
+					} , 300 , function(){
+						$('.list').css('left',0)
+						$('.list li img')[0].src = $('.list li img')[1].src
+					} )
+				}else{
+					$('.list').css('left',-$('.list li').eq(0).width())
+					$('.list li img')[1].src = $('.list li img')[0].src
+					$('.list li img')[0].src = arrImg[m]
+					
+					$('.list').stop().animate( {
+						left : 0
+					} , 300 )
+				}
+				n = m
+			})
+
+
+			function auto(){
+				if( $('.list').is(':animated') ){
+					return
+				}
+				n++
+				if( n > arrImg.length - 1 ){
+					n = 0
+				}
+				$('.list li img')[1].src = arrImg[n]
+				$('.list').stop().animate( {
+					left : -$('.list li:eq(0)').width()
+				} , 300 , function(){
+					$('.list').css('left',0)
+					$('.list li img')[0].src = $('.list li img')[1].src
+					
+				} )
+				$('.nav span').eq(n-1).removeClass('blue')
+				$('.nav span').eq(n).addClass('blue')
+			}
+		</script>
+	</body>
+
+</html>

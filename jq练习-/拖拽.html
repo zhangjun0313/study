@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            div{
+                width: 300px;
+                height: 300px;
+                position: absolute;
+                background: yellowgreen;
+                text-align: center;
+                font-size: 30px;
+                color: #fff;
+                line-height: 300px;
+                top: 0;
+                left: 0;
+            }
+            .div2{
+                background: red;
+                left: 1000px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="div1">拖拽元素一</div>
+        <div class="div2">拖拽元素二</div>
+
+        <script src="./jquery-3.2.0.js"></script>
+        <script>
+            class Tuo{
+                constructor(){
+                    this.downFn = this.downFn.bind(this)
+                    this.moveFn = this.moveFn.bind(this)
+                    this.upFn = this.upFn.bind(this)
+                }
+                init(box){
+                    this.box = box
+                    $(this.box).mousedown(this.downFn)
+                }
+                downFn( ev ){
+                    $(this.box).trigger('downFn')
+                    this.disX = ev.clientX - $(this.box).offset().left
+                    this.disY = ev.clientY - $(this.box).offset().top
+                    $(document).mousemove(this.moveFn)
+                    $(document).mouseup(this.upFn)
+                }
+                moveFn( ev ){
+                    
+                    $(this.box).css({
+                        'left':ev.clientX - this.disX,
+                        'top':ev.clientY - this.disY
+                    })
+                    ev.preventDefault()
+                    $(this.box).trigger('moveFn')
+                }
+                upFn(){
+                    $(this.box).trigger('upFn')
+                    $(document).unbind('mousemove',this.moveFn)
+                    $(document).unbind('mouseup',this.upFn)
+                }
+            }
+
+            
+            
+
+            let t1 = new Tuo()
+            t1.init($('.div1')[0])
+
+            $('.div1').on('downFn',function(){
+                $(this).css('background','blue')
+                console.log('div1发布的按下')
+            })
+            $('.div1').on('upFn',function(){
+                $(this).css('background','yellowgreen')
+                console.log('div1发布的抬起')
+            })
+            $('.div1').on('moveFn',function(){
+                console.log('div1发布的移动')
+            })
+
+            let t2 = new Tuo()
+            t2.init($('.div2')[0])
+            $('.div2').on('downFn',function(){
+                console.log('div2发布的按下')
+            })
+            $('.div2').on('upFn',function(){
+                console.log('div2发布的抬起')
+            })
+            $('.div2').on('moveFn',function(){
+                console.log('div2发布的移动')
+                //console.log( $(this).offset().left , $(window).width() - $(this).width() )
+                if( $(this).offset().left < 0 ){
+                    $(this).css('left',0)
+                }
+                if( $(this).offset().top < 0 ){
+                    $(this).css('top',0)
+                }
+                if( $(this).offset().left > $(window).width() - $(this).width() ){
+                    $(this).css('left',$(window).width() - $(this).width())
+                }
+                if( $(this).offset().top > $(window).height() - $(this).height() ){
+                    $(this).css('top',$(window).height() - $(this).height())
+                }
+            })
+        </script>
+    </body>
+</html>
