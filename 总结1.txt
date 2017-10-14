@@ -1,0 +1,451 @@
+-------------------------------------------------------------------------------------------------------
+8-31
+
+1.总结函数被调用的几种情况，this分别指向什么值？
+	>1. 直接调用 this => window
+	>2. 事件调用 this => 触发事件的元素
+	>3. 定时器调用 this => window
+	>4. 箭头函数被调用 this => 所定义的作用域的this
+	>5. new调用函数 this => 内部创建的隐式对象
+	>6. 对象调用函数 this => 调用函数的对象
+2.改变一个函数的this有哪些方法？说一说他们各自的特点。
+	call apply bind
+	>立马执行了：
+		**函数.call( )**
+		**函数.apply( )**
+	>不执行函数，改变this值
+		**函数.bind( )**    用bind可以不立即执行函数改变this
+
+-------------------------------------------------------------------------------------------------------
+9-05
+
+1.form表单提交数据
+	form表单作用：提交数据
+	form表单中的input的name很关键，是前后端约定的字段
+	不好的地方：提交数据，会跳转页面,万一写错了要回退，填好的信息可能丢失需要重写
+	action（要提交的地址）
+	method（提交的方式）  get和post
+	form表单提交数据的改进：分别验证每条信息，（打开新窗口）（参考9.05课件 3-form）
+
+2. get和post区别:
+   	真正的http协议里，二者没有很明显的区分，讨论二者的区别是在浏览器的范围内讨论
+	》get 方式：
+		*http://localhost:8088/backend/php/get.php?user=leo123&password=222
+		*发送数据的方式
+			*在地址栏中?的后面，就是查询信息，1key=value&lkey2=value2&key3=value3 成为为queryString
+		* 浏览器对地址有长度有限制，所以get的数据会有限制
+		* 浏览器会缓存地址
+		* 参数会保存在历史记录里
+		* 不安全，一般用来发送一些无关紧要的数据
+	》post方式：
+		* http://localhost:8088/backend/php/post.php
+		* 发送数据的方式
+			* 放在HTTP的请求body（主体）发送的
+		* 理论上没有大小限制
+			* 服务端会有限制
+		* 理论上是安全的
+
+3.AJAX
+	即“Asynchronous Javascript And XML”（异步JavaScript和XML），是指一种创建交互式网页应用的网页开发技术。
+
+4.Ajax的作用
+	* 1. 发送数据和服务器进行交互
+	* 2. 实现异步更新，不需要刷新整个页面，只做局部更新
+
+5.怎样使用Ajax请求数据？
+	*创建一个ajax对象，该对象拥有很多方法供我们调用
+		let xhr = new XMLHttpRequest;
+	*连接地址，准备好数据（启动一个请求以备发送）
+		》xhr.open( method,url,async ) 
+			open方法的作用：规定请求的类型、URL 以及是否异步处理请求。
+				参数
+					>   * method：请求的方式；get | post 不区分大小写
+					>   * url：发送的地址（文件在服务器上的位置）
+					>   * async：true（异步）或 false（同步）
+	*发送请求
+		xhr.send( );
+	*等到响应回来
+		只要浏览器接收到服务器的响应，不管其状态如何，都会触发load事件
+		带回来的内容存放在xhr.responseText里
+
+6.在post里需要手动加上请求头部，设置内容的类型
+	xhr.setRequestHeader( 'Content-Type','application/x-www-form-urlencoded');
+	post可以发送多种数据，所以需要告知服务器发送过去的是哪种数据，所以要加上请求头部
+
+7.enctype
+	enctype属性规定在发送到服务器之前应该如何对表单数据进行编码。
+	默认是：application/x-www-form-urlencoded
+	text/plain 文本
+	multipart/form-data 编码为二进制的，上传文件
+
+8.Ajax的工作流程
+	* 1.初始化，未发送
+		* 0	UNSENT
+	* 2.准备数据，连接地址
+		* 1	OPENED
+	* 3.返回响应头
+		* 2	HEADERS_RECEIVED   未返回内容，只返回了响应头
+	* 4.接收数据中
+		* 3	LOADING            返回内容，数据量大，分批返回
+	* 5.接收数据完毕
+		* 4	DONE               数据完全接受完成，可以拿数据做事情了
+
+	》怎么知道在哪一步？
+		xhr.readyState     值有0,1,2,3,4
+	》怎么监控走到哪一步？
+		IE6、7没有onload事件，用onreadystatechange事件
+		xhr.onreadystatechange = function ( ){
+			console.log( xhr.readyState );	
+			console.log( xhr.getAllResponseHeaders( ) );
+			console.log( xhr.responseText );
+		}
+		xhr.readyState===4，就相当于触发了onload事件
+
+9.status ：状态码
+	无论成功不成ajax都会返回的，会触发load事件，所以要用状态码来判断一下
+	statusText：状态短语
+
+-------------------------------------------------------------------------------------------------------
+9-06
+
+1.JSON数据结构
+	JSON可以表示以下三种类型的值
+		简单值，对象，数组。不能是函数	
+		》简单值（字符串、数值、布尔值、null）
+			JSON字符串必须使用双引号，使用单引号会报语法错误
+		》对象  { "username":"leo","age":30 }
+			与js的对象字面量的区别：
+				* JSON对象没有声明变量，（JSON中没有变量的概念）
+				* 没有末尾的分号
+				* 对象的属性（键值）必须加**双引号**！
+		》数组   ['mary',30,false]
+			JSON数组采用的是js中的数组字面量形式，JSON数组也没有变量和分号
+
+2.怎么拿到JSON数据结构里的数据？
+
+	把JSON转成对象
+	JSON对象（是一个全局对象），低版本浏览器没有JSON这个全局对象
+	stringify( )
+		作用：把js对象序列化为JSON字符串
+		向后端发送数据，不能传对象，必须转成文本，把对象转成json字符串
+		参数
+			> * 第一个参数：要转的js对象
+			> * 第二个参数： 是一个过滤器，可以是数组，可以是函数
+			> * 第三个参数：表示每个级别缩进的空格数，最长是10	
+	parse( )	
+		作用：把json字符串转成可用的对象
+		后端响应的数据，一般不会是字符串格式，而是类似对象的数据格式（json）
+		字符串格式JSON，想要把字符串转成可用的对象
+3.用JSON实现深拷贝
+	弊端：JSON数据里不能放函数，如果是函数就没办法拷贝
+		
+4.下载
+	<a href="./2017-09-06.zip">2017-09-06.zip</a>
+
+5.上传
+	> js是不能读取文件的，只有服务器的语言才能读取文件，如果js能读取就乱了，因为js是浏览器的脚本语言，如果js可以读取，发给别人一个html，别人一打开我就可以读取他电脑上的信息
+	> 所有的上传都是post方法
+	> 上传时都是把读取的文件转成二进制形式传给服务器，服务器再解码
+	> 上传到服务器。服务器有一个地方专门存放
+
+6.上传方法（参考9-06课件）
+	* 可以用form表单上传
+    		* form表单设置enctype = ""
+	* 可以用ajax上传（不刷新或跳转页面）
+    		* 找到要上传的文件。转成二进制
+    		* 找到文件？存在
+	* 两种方式根据需求选择使用
+
+7.FormData对象
+	*通过FormData对象可以组装一组用 XMLHttpRequest发送请求的键/值对。
+	*如果你把表单的编码类型设置为multipart/form-data ，则通过FormData传输的数据格式和表单通过submit() 方法传输的数据格式相同
+	》创建一个FormData对象
+		let f = new FormData( );
+	》FormData的append方法
+		语法：
+			formData.append(name, value, filename);
+		参数：
+			> * name
+			>   * value中包含的数据对应的**表单名称**（input标签的name，和后台约定好的name）。
+			> * value
+			>   * 表单的值。可以是USVString 或 Blob (包括子类型，如 File)。
+			> * filename 可选
+			>    * 传给服务器的文件名称 (一个 USVString), 当一个 Blob 或 File 被作为第二个参数的时候， Blob 对象的默认文件名是 "blob"。 File 对象的默认文件名是该文件的名称。
+			BLOB常常是数据库中用来存储二进制文件的字段类型。BLOB是一个大文件，典型的BLOB是一张图片或一个声音文件
+
+8.监控上传进度
+	xhr.upload.onprogress
+	与xhr.onprogress区别：
+		> * xhr.upload.onprogress在上传阶段(即xhr.send()之后，xhr.readystate=2之前)触发，每50ms触发一次；
+		> * xhr.onprogress在下载阶段（即xhr.readystate=3时）触发，每50ms触发一次。
+			
+9.跨域请求
+	》同源策略（Same origin policy）是一种约定，它是浏览器最核心也最基本的安全功能，如果缺少了同源策略，则浏览器的正常功能可能都会受到影响。可以说Web是构建在同源策略基础之上的，浏览器只是针对同源策略的一种实现。
+	》同源
+		域名，协议，端口相同。
+		有一个不同，就形成跨域
+	》域名 （域名  是ip的别名（小名））
+		* 一级域名：
+			* baidu.com   taoba.com   gome.com.cn  
+		* 二级域名：
+			* www.baidu.com/
+			* news.baidu.com/              
+			* git.oschina.net/
+		* 三级域名
+			* abc.news.baidu.com/
+	》协议
+		协议 服务器（客户端）进行通信的一种约定
+		https
+		http
+		ftp
+		file
+	》端口 
+		https  443
+		http 80
+		ftp  22
+		file 不知道		
+
+10.解决跨域
+	》设置允许跨域的头部   （不同的语言有不同的设置方法，这里是node.js的设置方法）
+		> 在请求的这个域上设置一个header
+		> 比如http://localhost:3000/访问http://localhost:8888/test  会产生跨域
+		> 在http://localhost:8888/这个域下设置header，允许3000来访问
+		> 设置允许3000端口访问
+		> res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+
+		##  设置允许所有端口访问
+			> res.header("Access-Control-Allow-Origin", "*");
+	》代理（请求自己域下的后端，自己域下的后端请求目标域的接口）
+		> 比如http://localhost:3000/访问http://localhost:8888/test  会产生跨域
+		> 比如http://localhost:3000/访问http://localhost:3000/abc.php
+		> 让http://localhost:3000/abc.php 去访问http://localhost:8888/test
+		
+		原理
+			> * 后端不存在跨域
+			> * 请求自己域下的后端，自己域下的后端请求目标域的接口
+			> * 但是后端存在安全限制，某些重要的接口不能访问，即使不能访问，但是也已经成功跨过去了
+	》jsonp
+		jsonp = json + padding
+
+		允许跨域的标签：a  img  script  link
+		》》这些标签不在乎给的后缀是什么，在乎的是能不能解析里面的内容
+			> * img需要的是src能被解析为图片，并不关心src里是不是图片的url地址
+			图片转为base64，不用发请求，小的图片文本比较少，可以用base64
+
+			> * script  关心的是内容能否被js解析器解析，并不关心src里是不是js文件，链接一个txt文件，txt里的js语法依然能被解析，从而在浏览器里展示交互效果
+			> * **php比较特殊**
+			> * php如果在本地打开，php不能被解析；
+			> 在服务器环境打开，php解析器解析，输出alert('hello'),这条代码是js语法，被js解析器解析，弹出'hello'
+			> link  内容能否被css解析器解析
+
+		用json填充数据
+			> 1. 先创建一个script标签，src赋值地址
+			> 2. 访问的地址返回数据，数据中会有一个函数的执行
+			> 3. 在全局放一个函数，返回了数据，数据中会有函数执行，就会执行这个函数
+			> 4. 可以通过函数的参数拿到所需要的数据
+
+11.  百度搜索例子，用跨域请求百度的接口  &&  QQ音乐例子，用跨域请求QQ音乐的部分接口（参考课件）
+
+-------------------------------------------------------------------------------------------------------
+9-07
+
+1.一个php文件可以既处理get请求又处理post请求
+
+2.localStorage（是一个全局对象）
+	不用localStorage时，只要刷新，代码重新执行，做不到数据持久化
+	本地存储：把数据存在本地，**以文本的形式存储**
+	每个域名都有，不同域名之间不能互相访问
+	》查看：浏览器F12 - Applicaiton - storage - localStorage
+	localStorage 方法存储的数据没有时间限制。第二天、第二周或下一年之后，数据依然可用。
+	作用：数据持久化
+	》应用：
+		》1.把网站一些不变的数据，存储在localStorage里
+		》2.可以存储文件数据，css，js，基础库存在localStorage里，不用每次都加载，省流量
+
+3.对本地存储的操作
+	
+	》添加内容
+		localStorage.setItem(key,value)
+		如果存数组或对象，要用JSON.stringify()转成字符串
+	》查找内容
+	     	localStorage.getItem(key)
+		如果查找到了，就返回对应的value值，如果没有查找到，返回null；
+	》改内容
+	    	给同一个key值赋值
+	》 删内容
+	     	localStorage.removeItem(key)
+
+	》存的是文本，如果存数组，对象，转成字符串
+
+4.购物车的简单实现
+》需求：同一个购物车的页面，如果在多个窗口打开，在其中一个窗口里添加商品，那么另外的窗口也都显示这些加进去的商品
+
+》思路：
+用localStorage作为第三方：
+
+在某个窗口点击添加商品时，把所加商品的数据存入localStorage，
+其他窗口监听到storage事件后，从localStorage里拿数据，渲染页面结构
+
+》分析：
+
+* localStorage里存的是json字符串
+* 渲染结构要用**数组**形式，每次点击商品，往数组里push数据
+* 所以要把字符串用JSON.stringify()转成数组
+
+》具体实现：
+
+* 定义一个空数组dataArr
+* 一开页面或者刷新页面，拿localStorage里的数据转成数组赋给dataArr
+* 点击商品，往数组里push数据，拿数组渲染页面，新数组转成json字符串存进localStorag约定好的key值对应的属性值
+* 其他页面监听到storage事件后，拿localStorage里的数据转成数组给dataArr赋新值，渲染结构
+
+》关于初始化：
+
+* 刚一打开页面，或者刷新页面时
+	* localStorage里有相关数据：数据转成数组赋给dataArr,拿dataArr渲染页面
+	* localStorage里没有相关数据，dataArr依然为初始值空，不渲染
+
+5.storage事件
+	> * 当同源页面的某个页面修改了localStorage,其余的同源页面只要注册了storage事件，就会触发，当前操作localStorage数据的页面不触发这个事件
+	> * 适用条件：
+	>   * 同一浏览器打开了两个同源页面
+	>   * 其中一个网页修改了localStorage
+	>   * 另一网页监听了storage事件（绑定了监听器，也就是事件处理函数）
+
+
+6.cookie
+	> http无状态的,使用cookie来记录登录状态，这个时候你在一个页面登录了，在同源下其他的页面也登陆了
+	> responseHeader(返回的响应头)里有set-cookie
+	> 一旦登录成功，后端会设置cookie
+	> cookie也是和域名有关系，必须是同源才拿到cookie
+	> 大小有限制 在kb之前
+	> 浏览器F12 - Application - Cookies  可以看到cookie
+
+7.cookie的生命周期
+	只有会话时间，浏览器会话结束，就删除
+	浏览器会话结束指的是关闭浏览器，不是关闭某个窗口
+
+8.设置cookie的过期时间，expires
+	let d = new Date();
+        	d.setMinutes(d.getMinutes()+1);
+        	document.cookie = 'test=123; expires=' + d.toUTCString(); 
+	cookie和过期时间之间用分号和空格隔开，转为UTC 世界标准时间
+
+9.封装cookie方法
+	》setCookie( )参数：传三个参数，前两个是字符串，最后一个是数字；第一个是cookie的key值，第二个是value值，第三个是过期时间（以天为单位）
+	
+	function setCookie(key,value,n){ 
+            
+           		 //调用函数传实参的时候，可能传n，也可能不需要设置过期时间就不传n，所以要判断一下
+           		 if(n){//如果传进来n了，说明要设置过期时间
+                		let d = new Date();
+                		d.setDate(d.getDate()+n);
+                		document.cookie = key + '=' + value + '; expires=' + d.toUTCString();
+            		}else{//如果没有传进来n，说明不需要设置过期时间
+                		document.cookie = key + '=' + value;
+           	 	}
+        	}
+       	setCookie('miaov','ketang',1);
+	
+	》getCookie( )   获取cookie
+		思路：比如传进来test，要从document.cookie这个字符串里截取到123
+		* 步骤：
+			* 1.用split方法 以分号加空格为界限 把字符串放到数组里  得到 [test=123,user=2,miaov=ketang];    
+    			* 2.循环数组，对每项用split方法 以等号=为单位 转成数组  得到[test,123],[user,2],[miaov.ketang];
+		代码
+		function getCookie(key){
+            			let cookies = document.cookie;//拿到字符串
+            			cookies = cookies.split('; ');//得到数组如[test=123,user=2,miaov=ketang]
+            			for(var i=0; i<cookies.length; i++){
+               				let arr = cookies[i].split('=');//得到如[test,123]格式的
+                			if(arr[0] === key){//如果arr[0]等于传进来的key值
+                    				return arr[1];//就把arr[1]（arr[0]对应的value值）返回出去
+                			}
+            			}   
+        		}
+        		console.log(getCookie('miaov'));
+
+	》removeCookie( ) （把过期时间设置为-1，这样一打开页面，该cookie就会消失）
+		function removeCookie(key){
+            			setCookie(key,null,-1);
+        		}
+        		removeCookie('miaov');
+
+
+----------------------------------------------------------------------------------------------------
+9-08（Vue）
+
+1.Vue.js是一套构建用户界面的渐进式框架。
+2.Vue作用：把数据和模板相结合，并且在数据发生变化的时候，会自动将数据更新在模板上，也就是响应式的绑定。
+3.形式：写在行间中已v-开头的自定义属性，vue会赋予特殊的意义，不同指令不同的作用
+4.vue两个特点：
+	1.响应的数据	
+		类似于响应式布局一样，当改变浏览器尺寸的时候，布局发生改变
+		在vue中只要数据发生变化，页面会自动更新
+	2.可组合的视图组件	
+5.在模板中要渲染数据， “Mustache” 语法（双大括号）文本插值
+	{{表达式能求出值}}
+6.Vue 构造函数 启动应用必须初始化一个实例
+7.参数
+	>**给Vue传入的参数，选项对象**
+		el(element) 页面中那一部分归vue管理，成为vue的模板
+		node #id名
+	data 要在模板中渲染的数据
+		值为 { }
+
+8.渲染数组/对象,循环模板
+	循环数组/对象，拿到两个东西：1. 每一项，2. 下标、属性
+	v-for="item,index in 数组" 
+		item 就是循环的每一项
+		index 就是下标
+9.在行间中要想自定义属性值解析为写的数据，明确的告诉vue，动态的渲染数据
+	v-bind:key="表达式" 简写为 :
+10.事件系统(v-on) （统一的把事件处理函数放在选项对象的mthods中）
+	简写@
+	v-on:事件名="表达式"  
+		表达式能求出值，函数名字
+
+-------------------------------------------------------------------------------------------------------
+9-11
+
+1.声明式编程  &&  命令式编程
+	》命令式编程：命令“机器”如何去做事情(how)，这样不管你想要的是什么(what)，它都会按照你的命令实现。
+ 	》声明式编程：告诉“机器”你想要的是什么(what)，让机器想出如何去做(how)。
+
+2.响应的数据绑定
+	内置是使用Object.defineProperty追踪变化的
+3.把data这个选项中的数据都放在实例上
+4.以$开头的属性，是vue内置提供，用来区分开发者添加的属性
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
