@@ -1,0 +1,73 @@
+.block {
+  width: 46rem;
+  height: 81.77777778rem;
+  background: #fff;
+}
+.phone_status {
+  width: 46rem;
+  height: 1.77777778rem;
+  background: #336e3c;
+}
+.user {
+  width: 46rem;
+  height: 16rem;
+  background: #336e3c;
+}
+.user_information {
+  width: 41.48148148rem;
+  height: 16rem;
+}
+.user_photo {
+  margin-top: 3.22222222rem;
+  margin-left: 2.22222222rem;
+}
+.user_name {
+  margin-left: 2.11111111rem;
+  margin-top: 6.11111111rem;
+}
+.user_name p {
+  font-size: 1.92592593rem;
+  font-weight: 500;
+  font-family: "宋体";
+  letter-spacing: 0.2962963rem;
+  color: #fff;
+}
+.set_up {
+  margin-right: 2.14814815rem;
+  margin-top: 1.48148148rem;
+}
+.user_nav {
+  width: 46rem;
+  height: 4.85185185rem;
+}
+.user_nav ul li {
+  width: 9.11111111rem;
+  height: 4.66666667rem;
+  font-size: 1.55555556rem;
+  line-height: 4.66666667rem;
+  font-family: "宋体";
+  letter-spacing: 0.18518519rem;
+  text-align: center;
+  color: #9b9b9b;
+}
+.user_nav ul .last {
+  width: 9.55555556rem;
+}
+.user_nav ul .border_bottom {
+  color: #494949;
+  border-bottom: 0.18518519rem solid #494949;
+}
+.content {
+  width: 46rem;
+  height: 59.14814815rem;
+  background: #f8f8f8;
+}
+/* 
+	去掉下方  热映； 找片； 我的；之后的高固定为1449px
+ */
+.empty {
+  width: 13.51851852rem;
+  height: 15.74074074rem;
+  margin-top: 19.48148148rem;
+  margin-left: 17.14814815rem;
+}

@@ -1,0 +1,130 @@
+.head {
+  width: 46rem;
+  height: 7.11111111rem;
+  background: #f9f9f9;
+  position: relative;
+  border-bottom: 0.03703704rem solid #b2b2b2;
+}
+.head span {
+  position: absolute;
+  left: 2.03703704rem;
+  top: 3.55555556rem;
+}
+.head h2 {
+  font-size: 1.85185185rem;
+  font-family: "宋体";
+  font-weight: 900;
+  color: #494949;
+  position: absolute;
+  left: 17.48148148rem;
+  top: 3.7037037rem;
+}
+.ranking {
+  height: 4.66666667rem;
+  border-bottom: 0.07407407rem solid #d8d8d8;
+}
+.ranking div {
+  width: 5.62962963rem;
+  height: 4.51851852rem;
+  font-size: 1.18518519rem;
+  font-weight: 600;
+  font-family: "宋体";
+  line-height: 4.51851852rem;
+  text-align: center;
+  color: #9b9b9b;
+  margin-left: 3.55555556rem;
+}
+.ranking .first {
+  margin-left: 1.81481481rem;
+}
+.ranking .black {
+  color: #494949;
+  border-bottom: 0.14814815rem solid #494949;
+}
+.film li {
+  margin-top: 5.92592593rem;
+}
+.serial_number {
+  width: 15.55555556rem;
+  height: 1.55555556rem;
+  margin-left: 15.33333333rem;
+}
+.serial_number .line {
+  width: 5.55555556rem;
+  height: 0.07407407rem;
+  margin-top: 0.88888889rem;
+  background: #d8d8d8;
+}
+.serial_number .number {
+  font-size: 1.55555556rem;
+  font-family: "宋体";
+  font-weight: 900;
+  font-style: oblique;
+  color: #ff4055;
+  margin-left: 1.77777778rem;
+  margin-right: 1.77777778rem;
+}
+.details {
+  margin-top: 2.81481481rem;
+  margin-left: 2rem;
+  width: 38rem;
+  height: 12.51851852rem;
+  border: 0.07407407rem solid #cccccc;
+  border-radius: 0.14814815rem;
+  padding: 1.92592593rem;
+}
+.details img {
+  margin-right: 1.7037037rem;
+}
+.details dd {
+  width: 27.37037037rem;
+}
+.details dd h2 {
+  font-size: 1.77777778rem;
+  font-weight: 900;
+  font-family: "宋体";
+  color: #474747;
+  margin-top: 0.55555556rem;
+  margin-bottom: 1.18518519rem;
+}
+.details .score {
+  font-size: 1.03703704rem;
+  font-family: "宋体";
+  margin-bottom: 1.18518519rem;
+}
+.details .score span {
+  color: #ffb712;
+}
+.details .score .number {
+  color: #9b9b9b;
+  margin-left: 0.44444444rem;
+}
+.details .director {
+  font-size: 1.33333333rem;
+  font-family: "宋体";
+  color: #9b9b9b;
+  margin-bottom: 0.74074074rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.details .performer {
+  font-size: 1.33333333rem;
+  font-family: "宋体";
+  color: #9b9b9b;
+  display: -webkit-box;
+  /** 对象作为伸缩盒子模型显示 **/
+  -webkit-box-orient: vertical;
+  /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+  -webkit-line-clamp: 3;
+  /** 显示的行数 **/
+  overflow: hidden;
+}
+.film .comment {
+  margin-left: 2.07407407rem;
+  margin-top: 2.59259259rem;
+  margin-bottom: 0.62962963rem;
+  font-size: 1.62962963rem;
+  font-family: "宋体";
+  color: #494949;
+}

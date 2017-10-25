@@ -1,0 +1,23 @@
+/* CSS Document */
+.clearfix:after{
+	content:"";
+	display:block;
+	height:0px;
+	clear:both;
+	overflow:hidden;
+}
+.clearfix{
+	zoom:1;
+}
+.fl{
+	float:left;
+}
+.fr{
+	float:right;
+}
+.bg{
+	background:url(../images/bg.png) no-repeat;	
+}
+.bbg{
+	background:url(../images/bbg.png) no-repeat;	
+}
