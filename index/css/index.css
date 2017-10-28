@@ -1,0 +1,223 @@
+.h {
+  width: 100%;
+  height: 2.18518519rem;
+  background: #000;
+}
+.return {
+  margin: 0.96296296rem 8.22222222rem 0 1.11111111rem;
+  width: 3.03703704rem;
+  height: 3.03703704rem;
+  background: url(../img/return.png);
+  background-size: 3.03703704rem 3.03703704rem;
+}
+.header h1 {
+  font-size: 2rem;
+  color: #252525;
+  line-height: 5rem;
+}
+.content {
+  height: 74.48148148rem;
+  background: url(../img/bg.png);
+}
+.more {
+  border-top: 0.03703704rem solid #6a6a6a;
+  background: #315559;
+}
+.more .logo {
+  width: 3.51851852rem;
+  height: 3.51851852rem;
+  background: url(../img/logo.png);
+  background-size: 3.51851852rem 3.51851852rem;
+  margin: 0.62962963rem 1.22222222rem 0.62962963rem 1.11111111rem;
+}
+.more h2 {
+  font-size: 1.55555556rem;
+  color: #fff;
+  line-height: 4.77777778rem;
+}
+.more input {
+  width: 6.81481481rem;
+  height: 2.59259259rem;
+  background: #ffae00;
+  border-radius: 1.11111111rem;
+  font-size: 1.55555556rem;
+  color: #333;
+  margin: 1.07407407rem 0 0 1.48148148rem;
+}
+.activity {
+  height: 21.07407407rem;
+}
+.activity-left {
+  margin: 2.51851852rem 0 0 3.55555556rem;
+}
+.doco {
+  margin-bottom: 1.62962963rem;
+}
+.doco span {
+  width: 12.11111111rem;
+  height: 5.55555556rem;
+  background: url(../img/doco.png);
+  background-size: 12.11111111rem 5.55555556rem;
+  margin: 0 0.59259259rem;
+}
+.doco i {
+  font-size: 2.18518519rem;
+  color: #000;
+  font-weight: 900;
+  margin-top: 3.25925926rem;
+}
+.activity .animated-characters {
+  width: 11.74074074rem;
+  height: 18.85185185rem;
+  background: url(../img/animated-characters.png);
+  background-size: 11.74074074rem 18.85185185rem;
+  margin: 0.96296296rem 2.44444444rem 0 0;
+}
+.font {
+  width: 27.07407407rem;
+  height: 4.37037037rem;
+  background: url(../img/font.png);
+  background-size: 27.07407407rem 4.37037037rem;
+  margin-bottom: 3.25925926rem;
+}
+.time {
+  font-size: 1.40740741rem;
+  color: #000;
+}
+.txt {
+  height: 24.55555556rem;
+  padding: 2.37037037rem 0 0 4.48148148rem;
+  position: relative;
+}
+.position {
+  font-size: 1.55555556rem;
+  color: #333;
+  position: absolute;
+  top: 4rem;
+  left: 5.92592593rem;
+}
+.cell-phone-number {
+  width: 37.03703704rem;
+  height: 4.44444444rem;
+  background: #f1f1f1;
+  border: 0.03703704rem solid #d5d5d5;
+  border-radius: 0.37037037rem;
+  font-size: 1.55555556rem;
+  color: #999;
+  padding-left: 8.07407407rem;
+  margin-bottom: 1.03703704rem;
+}
+.position2 {
+  top: 9.40740741rem;
+}
+.verification-code {
+  width: 23.33333333rem;
+  height: 4.44444444rem;
+  background: #f1f1f1;
+  border-radius: 0.37037037rem;
+  font-size: 1.55555556rem;
+  color: #999;
+  padding-left: 8.07407407rem;
+  margin-right: 1.07407407rem;
+}
+.get-verification-code {
+  width: 12.59259259rem;
+  height: 4.44444444rem;
+  background: #404040;
+  border-radius: 0.37037037rem;
+  font-size: 1.55555556rem;
+  color: #fff;
+}
+.btn {
+  width: 20.51851852rem;
+  height: 4.25925926rem;
+  background: url(../img/btn-bg.png);
+  background-size: 20.51851852rem 4.25925926rem;
+  margin: 3.7037037rem 0 0 8.51851852rem;
+  font-size: 1.85185185rem;
+  color: #fff;
+  text-align: center;
+  line-height: 4.25925926rem;
+}
+.gift {
+  width: 5.85185185rem;
+  height: 6.85185185rem;
+  background: url(../img/gift.png);
+  background-size: 5.85185185rem 6.85185185rem;
+  position: absolute;
+  top: 13.77777778rem;
+  left: 9.59259259rem;
+}
+.explain {
+  width: 42.7037037rem;
+  height: 24.03703704rem;
+  background: url(../img/explain-bg1.png);
+  background-size: 42.7037037rem 24.03703704rem;
+  margin-left: 1.62962963rem;
+  padding-top: 1.2962963rem;
+  position: relative;
+}
+.explain-bg2 {
+  width: 41.59259259rem;
+  height: 22.74074074rem;
+  background: url(../img/explain-bg2.png);
+  background-size: 41.59259259rem 22.74074074rem;
+  margin-left: 0.55555556rem;
+  padding-top: 2.2962963rem;
+}
+.explain-bg2 h2 {
+  margin-bottom: 3.18518519rem;
+  font-size: 1.55555556rem;
+  color: #ffed32;
+  position: relative;
+}
+.explain-bg2 h2 i {
+  margin-left: 17.7037037rem;
+}
+.explain-bg2 h2 span {
+  width: 1.66666667rem;
+  height: 0.81481481rem;
+  background: url(../img/decorate.png);
+  background-size: 1.66666667rem 0.81481481rem;
+  position: absolute;
+  top: 0.44444444rem;
+  left: 14.14814815rem;
+}
+.explain-bg2 h2 .two {
+  left: 25.88888889rem;
+}
+.explain-bg2 ul {
+  margin-left: 5.18518519rem;
+}
+.explain-bg2 ul li {
+  font-size: 1.55555556rem;
+  color: #fff;
+  margin-bottom: 1.22222222rem;
+}
+.explain-bg2 ul li i {
+  width: 0.74074074rem;
+  height: 1.03703704rem;
+  background: url(../img/one.png);
+  background-size: 0.74074074rem 1.03703704rem;
+  margin: 0.22222222rem 1.07407407rem 0 0;
+}
+.explain-bg2 ul li .num2 {
+  background: url(../img/two.png);
+  background-size: 0.74074074rem 1.03703704rem;
+}
+.explain-bg2 ul li .num3 {
+  background: url(../img/three.png);
+  background-size: 0.74074074rem 1.03703704rem;
+}
+.explain-bg2 ul li .num4 {
+  background: url(../img/four.png);
+  background-size: 0.74074074rem 1.03703704rem;
+}
+.explain-decorate {
+  width: 39.62962963rem;
+  height: 7.40740741rem;
+  background: url(../img/explain-decorate.png);
+  position: absolute;
+  top: -3.66666667rem;
+  left: 0.40740741rem;
+}
