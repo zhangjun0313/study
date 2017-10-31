@@ -1,0 +1,122 @@
+.h {
+  width: 100%;
+  height: 2.18518519rem;
+  background: #000;
+}
+.return {
+  margin: 0.96296296rem 8.22222222rem 0 1.11111111rem;
+  width: 3.03703704rem;
+  height: 3.03703704rem;
+  background: url(../img/return.png);
+  background-size: 3.03703704rem 3.03703704rem;
+}
+.header h1 {
+  font-size: 2rem;
+  color: #252525;
+  line-height: 5rem;
+}
+.content {
+  height: 74.48148148rem;
+  background: url(../img/winning_1.bg.png);
+  background-size: 46rem 74.48148148rem;
+  padding-top: 17.07407407rem;
+  position: relative;
+}
+.decorate {
+  width: 22.62962963rem;
+  height: 11.14814815rem;
+  background: url(../img/winning_2-decorate.png);
+  background-size: 22.62962963rem 11.14814815rem;
+  position: absolute;
+  top: 7.74074074rem;
+  left: 12.11111111rem;
+}
+.aiqiyi {
+  width: 34.37037037rem;
+  height: 13.66666667rem;
+  background: url(../img/aiqiyi.png);
+  background-size: 34.37037037rem 13.66666667rem;
+  margin: 0 auto;
+  padding-top: 1.40740741rem;
+}
+.card {
+  font-size: 2.55555556rem;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 1.88888889rem;
+}
+.exchange {
+  font-size: 2.22222222rem;
+  color: #fdfffe;
+  text-align: center;
+  margin-bottom: 2.96296296rem;
+}
+.date {
+  padding-left: 1.48148148rem;
+}
+.date span {
+  font-size: 1.51851852rem;
+  color: #999;
+}
+.date i {
+  font-size: 1.51851852rem;
+  color: #333;
+}
+.platform {
+  margin: 2.81481481rem 0 2.7037037rem 0;
+  text-align: center;
+}
+.platform h2,
+.platform p span,
+.platform p a {
+  font-size: 1.40740741rem;
+  color: #333;
+}
+.platform h2 {
+  text-align: center;
+}
+.platform p a {
+  color: #3453b8;
+  text-decoration: underline;
+}
+.platform h2 {
+  margin-bottom: 0.7037037rem;
+}
+.platform p {
+  width: 25.92592593rem;
+  margin: 0 auto;
+  line-height: 2.37037037rem;
+}
+.prompt {
+  font-size: 1.55555556rem;
+  color: #333;
+  line-height: 2.66666667rem;
+  width: 29.62962963rem;
+  margin: 0 auto;
+  text-align: center;
+}
+.link-good {
+  width: 22.22222222rem;
+  margin: 2.59259259rem auto 2.48148148rem auto;
+  border-bottom: 0.07407407rem solid #ffffff;
+}
+.link-good a {
+  font-size: 1.55555556rem;
+  color: #fff;
+}
+.hand-click {
+  width: 4.25925926rem;
+  height: 6.33333333rem;
+  background: url(../img/hand-click.png);
+  background-size: 4.25925926rem 6.33333333rem;
+  margin: 0 auto;
+}
+.decorate2 {
+  width: 37.85185185rem;
+  height: 11.07407407rem;
+  background: url(../img/winning_2-decorate2.png);
+  background-size: 37.85185185rem 11.07407407rem;
+  position: absolute;
+  top: 25.2962963rem;
+  left: 5rem;
+}

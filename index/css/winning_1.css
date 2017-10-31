@@ -1,0 +1,96 @@
+.h {
+  width: 100%;
+  height: 2.18518519rem;
+  background: #000;
+}
+.return {
+  margin: 0.96296296rem 8.22222222rem 0 1.11111111rem;
+  width: 3.03703704rem;
+  height: 3.03703704rem;
+  background: url(../img/return.png);
+  background-size: 3.03703704rem 3.03703704rem;
+}
+.header h1 {
+  font-size: 2rem;
+  color: #252525;
+  line-height: 5rem;
+}
+.content {
+  height: 74.48148148rem;
+  background: url(../img/winning_1.bg.png);
+  background-size: 46rem 74.48148148rem;
+  padding-top: 9.59259259rem;
+  position: relative;
+}
+.prize {
+  width: 23.74074074rem;
+  height: 23.55555556rem;
+  background: url(../img/prize.png);
+  background-size: 23.74074074rem 23.55555556rem;
+  margin: 0 auto;
+}
+.txt {
+  font-size: 1.55555556rem;
+  color: #333;
+  text-align: center;
+  margin: 3.25925926rem 0 4rem 0;
+}
+.btn {
+  width: 20.51851852rem;
+  height: 4.25925926rem;
+  background: url(../img/btn-bg.png);
+  background-size: 20.51851852rem 4.25925926rem;
+  margin-left: 13.03703704rem;
+  font-size: 1.85185185rem;
+  color: #fff;
+  text-align: center;
+  line-height: 4.25925926rem;
+}
+.gift {
+  width: 5.85185185rem;
+  height: 6.85185185rem;
+  background: url(../img/gift.png);
+  background-size: 5.85185185rem 6.85185185rem;
+  position: absolute;
+  top: 39.48148148rem;
+  left: 9.81481481rem;
+}
+.prompt {
+  margin-bottom: 2.88888889rem;
+}
+.prompt h2,
+.prompt p {
+  font-size: 1.40740741rem;
+  color: #404040;
+  text-align: center;
+}
+.prompt h2 {
+  margin: 2.18518519rem 0 1.40740741rem 0;
+}
+.link-good {
+  width: 22.22222222rem;
+  margin: 0 auto;
+  border-bottom: 0.07407407rem solid #ffffff;
+  margin-bottom: 2.55555556rem;
+}
+.link-good a {
+  font-size: 1.55555556rem;
+  color: #fff;
+  margin: 0 auto;
+}
+.hand-click {
+  width: 4.25925926rem;
+  height: 6.33333333rem;
+  background: url(../img/hand-click.png);
+  background-size: 4.25925926rem 6.33333333rem;
+  margin: 0 auto;
+}
+.decorate {
+  width: 34.85185185rem;
+  height: 11rem;
+  background: url(../img/winning-decorate.png);
+  background-size: 34.85185185rem 11rem;
+  position: absolute;
+  left: 6.33333333rem;
+  top: 43.33333333rem;
+}

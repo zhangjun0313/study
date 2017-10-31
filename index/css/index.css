@@ -18,6 +18,7 @@
 .content {
   height: 74.48148148rem;
   background: url(../img/bg.png);
+  background-size: 46rem 74.48148148rem;
 }
 .more {
   border-top: 0.03703704rem solid #6a6a6a;
@@ -217,6 +218,7 @@
   width: 39.62962963rem;
   height: 7.40740741rem;
   background: url(../img/explain-decorate.png);
+  background-size: 39.62962963rem 7.40740741rem;
   position: absolute;
   top: -3.66666667rem;
   left: 0.40740741rem;
